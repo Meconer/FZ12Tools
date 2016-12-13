@@ -7,6 +7,7 @@ package FZ12Tools;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
 /**
@@ -15,6 +16,26 @@ import javafx.fxml.Initializable;
  * @author matsandersson
  */
 public class FXMLController implements Initializable {
+    
+    @FXML
+    private void onOpenToa() {
+        
+    }
+    
+    @FXML
+    private void onLoadToolsFromToa() {
+        
+    }
+    
+    @FXML
+    private void onClose() {
+        System.exit(0);
+    }
+
+    @FXML
+    private void onAbout() {
+        
+    }
 
     /**
      * Initializes the controller class.
