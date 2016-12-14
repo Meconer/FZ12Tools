@@ -23,6 +23,11 @@ public class FXMLController implements Initializable {
     }
     
     @FXML
+    private void onOpenMpf() {
+        
+    }
+    
+    @FXML
     private void onLoadToolsFromToa() {
         
     }
