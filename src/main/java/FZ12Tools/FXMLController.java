@@ -10,6 +10,8 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeView;
 
 /**
  * FXML Controller class
@@ -17,28 +19,38 @@ import javafx.scene.control.TextArea;
  * @author matsandersson
  */
 public class FXMLController implements Initializable {
-    
+
     FZ12Program fZ12Program = null;
-    
-    @FXML 
+
+    @FXML
     private TextArea programTextArea;
-    
+    @FXML
+    private TreeView treeView;
+
     @FXML
     private void onOpenToa() {
-        
+
     }
-    
+
     @FXML
     private void onOpenMpf() {
         fZ12Program = FZ12Program.loadFromFile();
         programTextArea.setText(fZ12Program.entireProgram);
     }
-    
+
     @FXML
     private void onLoadToolsFromToa() {
-        
+
     }
-    
+
+    @FXML
+    private void onBuildToolTree() {
+        if (fZ12Program != null) {
+            fZ12Program.buildToolTreeFromMpf();
+            TreeItem<String> rootNode = new TreeItem<>("");
+        }
+    }
+
     @FXML
     private void onClose() {
         System.exit(0);
@@ -46,7 +58,7 @@ public class FXMLController implements Initializable {
 
     @FXML
     private void onAbout() {
-        
+
     }
 
     /**
@@ -55,6 +67,6 @@ public class FXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
+
 }

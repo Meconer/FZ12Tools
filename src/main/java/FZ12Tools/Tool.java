@@ -5,8 +5,6 @@
  */
 package FZ12Tools;
 
-import javax.swing.JFrame;
-
 /**
  *
  * @author matsandersson

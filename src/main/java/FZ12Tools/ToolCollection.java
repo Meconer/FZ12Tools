@@ -18,7 +18,7 @@ class ToolCollection {
 
     public void addTool(String id, int placeNo, int dNo) {
 
-        if (!toolExist(dNo)) {
+        if (!toolExist(id, dNo)) {
             Tool tool = new Tool(id, placeNo, dNo);
             collection.add(tool);
         }
@@ -28,11 +28,11 @@ class ToolCollection {
         collection.add(tool);
     }
 
-    public boolean toolExist(int dNo) {
+    public boolean toolExist(String id , int dNo) {
         Iterator<Tool> toolIterator = collection.iterator();
         while (toolIterator.hasNext()) {
             Tool tool = toolIterator.next();
-            if (tool.getdNo() == dNo) {
+            if (tool.getdNo() == dNo && tool.getId().equals(id)) {
                 return true;
             }
         }

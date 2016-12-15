@@ -15,12 +15,15 @@ import java.nio.file.Paths;
  */
 class Utilities {
 
+    private static final boolean DEBUG = true;
+    
     static File getHomeDirectory() {
+        if ( DEBUG ) return new File( System.getProperty("user.home") + "\\Documents");
         String meconaHomeDir = "J:\\NCDOK\\";
         if ( Files.exists( Paths.get( meconaHomeDir ))) {
             return new File( meconaHomeDir );
         } else {
-            return new File( System.getProperty("user.home"));
+            return new File( System.getProperty("user.home") + "\\Documents");
         }
     }
     
