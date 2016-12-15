@@ -3,8 +3,9 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TreeView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
@@ -22,7 +23,7 @@
                 <Menu mnemonicParsing="false" text="Edit">
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#onLoadToolsFromToa" text="Ladda verktyg från TOA" />
-                        <MenuItem mnemonicParsing="false" onAction="#onBuildToolTree" text="Skapa verktygsträd från MPF" />
+                        <MenuItem mnemonicParsing="false" onAction="#onBuildToolTree" text="Skapa verktygstabell från MPF" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
@@ -37,7 +38,16 @@
         <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <children>
                 <TextArea fx:id="programTextArea" prefHeight="633.0" prefWidth="394.0" promptText="Textarea1" text="&#10;" />
-            <TreeView fx:id="treeView" prefHeight="633.0" prefWidth="664.0" />
+            <TableView fx:id="tableView" prefHeight="633.0" prefWidth="653.0">
+              <columns>
+                <TableColumn prefWidth="60.0" text="Id" />
+                <TableColumn prefWidth="70.0" text="D nr" />
+                  <TableColumn prefWidth="130.0" text="Längd 1 (L)" />
+                  <TableColumn prefWidth="130.0" text="Längd 2 (R)" />
+                  <TableColumn prefWidth="130.0" text="Längd 3 (Y)" />
+                  <TableColumn prefWidth="130.0" text="Nosradie" />
+              </columns>
+            </TableView>
             </children>
         </HBox>
     </center>

@@ -14,10 +14,11 @@ class Tool {
     
     protected int placeNo;      // Place number. 1 to MAX_PLACE_NUMBER
 
+    protected String id;
     protected int dNo;          // Offset number.
-    protected String qValue;    // Geometry values for the tool.
-    protected String lValue;
-    protected String hValue;
+    protected String l1Value;    // Geometry values for the tool.
+    protected String l2Value;
+    protected String l3Value;
     protected String rValue;
     protected int slValue;      // Cut location
     protected int toolType;
@@ -31,13 +32,13 @@ class Tool {
         
     }
     
-    public Tool(String id, int placeNo, int dNo, String qValue, String lValue, String hValue, String rValue, int slValue) {
+    public Tool(String id, int placeNo, int dNo, String l1Value, String lValue, String hValue, String rValue, int slValue) {
         this.id = id;
         this.placeNo = placeNo;
         this.dNo = dNo;
-        this.qValue = qValue;
-        this.lValue = lValue;
-        this.hValue = hValue;
+        this.l1Value = l1Value;
+        this.l2Value = lValue;
+        this.l3Value = hValue;
         this.rValue = rValue;
         this.slValue = slValue;
     }
@@ -47,7 +48,6 @@ class Tool {
         this.placeNo = placeNo;
         this.dNo = dNo;
     }
-    protected String id;
 
     public String getId() {
         return id;
@@ -82,27 +82,27 @@ class Tool {
     }
 
     public String getqValue() {
-        return qValue;
+        return l1Value;
     }
 
     public void setqValue(String qValue) {
-        this.qValue = qValue;
+        this.l1Value = qValue;
     }
 
     public String getlValue() {
-        return lValue;
+        return l2Value;
     }
 
     public void setlValue(String lValue) {
-        this.lValue = lValue;
+        this.l2Value = lValue;
     }
 
     public String gethValue() {
-        return hValue;
+        return l3Value;
     }
 
     public void sethValue(String hValue) {
-        this.hValue = hValue;
+        this.l3Value = hValue;
     }
 
     public String getrValue() {
