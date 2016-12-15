@@ -34,7 +34,7 @@
     <center>
         <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <children>
-                <TextArea prefHeight="200.0" prefWidth="200.0" promptText="Textarea1" text="&#10;" />
+                <TextArea fx:id="programTextArea" prefHeight="200.0" prefWidth="200.0" promptText="Textarea1" text="&#10;" />
                 <TextArea prefHeight="200.0" prefWidth="200.0" text="Textarea2&#10;" />
             </children>
         </HBox>

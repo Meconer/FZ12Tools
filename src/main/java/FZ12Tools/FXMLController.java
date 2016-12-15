@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TextArea;
 
 /**
  * FXML Controller class
@@ -17,6 +18,11 @@ import javafx.fxml.Initializable;
  */
 public class FXMLController implements Initializable {
     
+    FZ12Program fZ12Program = null;
+    
+    @FXML 
+    private TextArea programTextArea;
+    
     @FXML
     private void onOpenToa() {
         
@@ -24,7 +30,8 @@ public class FXMLController implements Initializable {
     
     @FXML
     private void onOpenMpf() {
-        
+        fZ12Program = FZ12Program.loadFromFile();
+        programTextArea.setText(fZ12Program.entireProgram);
     }
     
     @FXML
