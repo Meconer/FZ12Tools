@@ -11,7 +11,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeView;
 
 /**
  * FXML Controller class
@@ -21,15 +20,17 @@ import javafx.scene.control.TreeView;
 public class FXMLController implements Initializable {
 
     FZ12Program fZ12Program = null;
+    ToaToolDescription toaToolDescription = null;
 
     @FXML
     private TextArea programTextArea;
     @FXML
-    private TreeView treeView;
+    private TextArea toaTextArea;
 
     @FXML
     private void onOpenToa() {
-
+        toaToolDescription = ToaToolDescription.loadFromFile();
+        toaTextArea.setText(toaToolDescription.getToaText());
     }
 
     @FXML
