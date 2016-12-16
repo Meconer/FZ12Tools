@@ -40,30 +40,30 @@
     <center>
         <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <children>
-            <TabPane>
-               <tabs>
-                  <Tab text="MPF">
-                     <content>
-                            <TextArea fx:id="programTextArea" prefHeight="633.0" prefWidth="394.0" promptText="Textarea1" text="&#10;" />
-                     </content>
-                  </Tab>
-                  <Tab text="TOA">
-                     <content>
-                        <TextArea fx:id="toaTextArea" prefHeight="633.0" prefWidth="394.0" promptText="Textarea1" text="&#10;" />
-                     </content>
-                  </Tab>
-               </tabs>
-            </TabPane>
-            <TableView fx:id="tableView" prefHeight="633.0" prefWidth="653.0">
-              <columns>
-                <TableColumn prefWidth="60.0" text="Id" />
-                <TableColumn prefWidth="70.0" text="D nr" />
-                  <TableColumn prefWidth="130.0" text="Längd 1 (L)" />
-                  <TableColumn prefWidth="130.0" text="Längd 2 (R)" />
-                  <TableColumn prefWidth="130.0" text="Längd 3 (Y)" />
-                  <TableColumn prefWidth="130.0" text="Nosradie" />
-              </columns>
-            </TableView>
+                <TabPane>
+                    <tabs>
+                        <Tab text="MPF">
+                            <content>
+                                <TextArea fx:id="programTextArea" prefHeight="633.0" prefWidth="394.0" promptText="Textarea1" text="&#10;" />
+                            </content>
+                        </Tab>
+                        <Tab text="TOA">
+                            <content>
+                                <TextArea fx:id="toaTextArea" prefHeight="633.0" prefWidth="394.0" promptText="Textarea1" text="&#10;" />
+                            </content>
+                        </Tab>
+                    </tabs>
+                </TabPane>
+                <TableView fx:id="tableView" prefHeight="633.0" prefWidth="653.0">
+                    <columns>
+                        <TableColumn fx:id="tNoCol" prefWidth="60.0" text="T nr" />
+                        <TableColumn fx:id="dNoCol" prefWidth="70.0" text="D nr" />
+                        <TableColumn fx:id="l1ValueCol" prefWidth="130.0" text="Längd 1 (L/X)" />
+                        <TableColumn fx:id="l2ValueCol" prefWidth="130.0" text="Längd 2 (R/Z)" />
+                        <TableColumn fx:id="l3ValueCol" prefWidth="130.0" text="Längd 3 (Y)" />
+                        <TableColumn fx:id="rValueCol" prefWidth="130.0" text="Nosradie" />
+                    </columns>
+                </TableView>
             </children>
         </HBox>
     </center>

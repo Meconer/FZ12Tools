@@ -7,6 +7,8 @@ package FZ12Tools;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -14,7 +16,11 @@ import java.util.Iterator;
  */
 class ToolCollection {
 
-    ArrayList<Tool> collection = new ArrayList<>();
+    ObservableList<Tool> collection;
+
+    ToolCollection() {
+        this.collection = FXCollections.observableArrayList();
+    }
 
     public void addTool(int tNo, int dNo) {
 
@@ -32,7 +38,7 @@ class ToolCollection {
         Iterator<Tool> toolIterator = collection.iterator();
         while (toolIterator.hasNext()) {
             Tool tool = toolIterator.next();
-            if (tool.getdNo() == dNo && tool.getTNo() == tNo ) {
+            if (tool.getDNo() == dNo && tool.getTNo() == tNo ) {
                 return true;
             }
         }
@@ -62,7 +68,7 @@ class ToolCollection {
         Iterator<Tool> toolIterator = collection.iterator();
         while (toolIterator.hasNext()) {
             Tool tool = toolIterator.next();
-            if (tool.tNo == placeNo) {
+            if (tool.getTNo() == placeNo) {
                 toolListByPlace.add(tool);
             }
         }

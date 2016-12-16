@@ -9,8 +9,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TreeItem;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
  * FXML Controller class
@@ -21,11 +23,26 @@ public class FXMLController implements Initializable {
 
     FZ12Program fZ12Program = null;
     ToaToolDescription toaToolDescription = null;
+    ToolCollection usedTools;
 
     @FXML
     private TextArea programTextArea;
     @FXML
     private TextArea toaTextArea;
+    @FXML
+    private TableView<Tool> tableView;
+    @FXML
+    private TableColumn tNoCol;
+    @FXML
+    private TableColumn dNoCol;
+    @FXML
+    private TableColumn l1ValueCol;
+    @FXML
+    private TableColumn l2ValueCol;
+    @FXML
+    private TableColumn l3ValueCol;
+    @FXML
+    private TableColumn rValueCol;
 
     @FXML
     private void onOpenToa() {
@@ -47,8 +64,8 @@ public class FXMLController implements Initializable {
     @FXML
     private void onBuildToolTree() {
         if (fZ12Program != null) {
-            fZ12Program.buildToolTreeFromMpf();
-            TreeItem<String> rootNode = new TreeItem<>("");
+            fZ12Program.buildToolTreeFromMpf(usedTools);
+            initTableView();
         }
     }
 
@@ -67,7 +84,18 @@ public class FXMLController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        // Todo
+    }
+
+    private void initTableView() {
+        
+        tNoCol.setCellValueFactory( new PropertyValueFactory<>("tNo"));
+        dNoCol.setCellValueFactory( new PropertyValueFactory<>("dNo"));
+        l1ValueCol.setCellValueFactory(new PropertyValueFactory<>("l1Value"));
+        l2ValueCol.setCellValueFactory(new PropertyValueFactory<>("l2Value"));
+        l3ValueCol.setCellValueFactory(new PropertyValueFactory<>("l3Value"));
+        rValueCol.setCellValueFactory(new PropertyValueFactory<>("rValue"));
+        tableView.setItems(usedTools.collection);
     }
 
 }

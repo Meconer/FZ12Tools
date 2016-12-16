@@ -23,7 +23,6 @@ import javafx.stage.FileChooser;
 public class FZ12Program {
 
     String entireProgram = null;
-    private ToolCollection usedTools;
     private Path currentFilePath;
 
     public static FZ12Program loadFromFile() {
@@ -49,7 +48,7 @@ public class FZ12Program {
         return null;
     }
 
-    void buildToolTreeFromMpf() {
+    void buildToolTreeFromMpf(ToolCollection usedTools) {
         usedTools = new ToolCollection();
         String toolRegexp = ".*(T\\d+).*";
         String dNoRegexp = ".*(D\\d+).*";
