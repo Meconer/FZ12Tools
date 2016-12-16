@@ -16,10 +16,10 @@ class ToolCollection {
 
     ArrayList<Tool> collection = new ArrayList<>();
 
-    public void addTool(String id, int placeNo, int dNo) {
+    public void addTool(int tNo, int dNo) {
 
-        if (!toolExist(id, dNo)) {
-            Tool tool = new Tool(id, placeNo, dNo);
+        if (!toolExist(tNo, dNo)) {
+            Tool tool = new Tool(tNo, dNo);
             collection.add(tool);
         }
     }
@@ -28,11 +28,11 @@ class ToolCollection {
         collection.add(tool);
     }
 
-    public boolean toolExist(String id , int dNo) {
+    public boolean toolExist(int tNo , int dNo) {
         Iterator<Tool> toolIterator = collection.iterator();
         while (toolIterator.hasNext()) {
             Tool tool = toolIterator.next();
-            if (tool.getdNo() == dNo && tool.getId().equals(id)) {
+            if (tool.getdNo() == dNo && tool.getTNo() == tNo ) {
                 return true;
             }
         }
@@ -62,7 +62,7 @@ class ToolCollection {
         Iterator<Tool> toolIterator = collection.iterator();
         while (toolIterator.hasNext()) {
             Tool tool = toolIterator.next();
-            if (tool.placeNo == placeNo) {
+            if (tool.tNo == placeNo) {
                 toolListByPlace.add(tool);
             }
         }

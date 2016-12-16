@@ -10,13 +10,11 @@ package FZ12Tools;
  * @author matsandersson
  */
 class Tool {
-    static final public int MAX_PLACE_NUMBER = 46;
+    static final public int MAX_TOOL_NUMBER = 46;
     
-    protected int placeNo;      // Place number. 1 to MAX_PLACE_NUMBER
-
-    protected String id;
+    protected int tNo;          // Tool number. 1 to MAX_TOOL_NUMBER
     protected int dNo;          // Offset number.
-    protected String l1Value;    // Geometry values for the tool.
+    protected String l1Value;   // Geometry values for the tool.
     protected String l2Value;
     protected String l3Value;
     protected String rValue;
@@ -32,9 +30,8 @@ class Tool {
         
     }
     
-    public Tool(String id, int placeNo, int dNo, String l1Value, String lValue, String hValue, String rValue, int slValue) {
-        this.id = id;
-        this.placeNo = placeNo;
+    public Tool( int tNo, int dNo, String l1Value, String lValue, String hValue, String rValue, int slValue) {
+        this.tNo = tNo;
         this.dNo = dNo;
         this.l1Value = l1Value;
         this.l2Value = lValue;
@@ -43,26 +40,17 @@ class Tool {
         this.slValue = slValue;
     }
 
-    public Tool(String id, int placeNo, int dNo ) {
-        this.id = id;
-        this.placeNo = placeNo;
+    public Tool( int tNo, int dNo ) {
+        this.tNo = tNo;
         this.dNo = dNo;
     }
 
-    public String getId() {
-        return id;
+    public int getTNo() {
+        return tNo;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public int getPlaceNo() {
-        return placeNo;
-    }
-
-    public void setPlaceNo(int placeNo) {
-        this.placeNo = placeNo;
+    public void setTNo(int placeNo) {
+        this.tNo = placeNo;
     }
 
     public int getType() {
@@ -155,9 +143,7 @@ class Tool {
     
     @Override
     public String toString() {
-        return id + " \n"
-                + "T=" + placeNo
-                + " D=" + dNo;
+        return "T=" + tNo + " D=" + dNo;
     }
     
     
