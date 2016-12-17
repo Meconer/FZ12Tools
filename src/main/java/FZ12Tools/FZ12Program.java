@@ -48,8 +48,8 @@ public class FZ12Program {
         return null;
     }
 
-    void buildToolTreeFromMpf(ToolCollection usedTools) {
-        usedTools = new ToolCollection();
+    ToolCollection buildToolTreeFromMpf() {
+        ToolCollection usedTools = new ToolCollection();
         String toolRegexp = ".*(T\\d+).*";
         String dNoRegexp = ".*(D\\d+).*";
         Pattern toolPattern = Pattern.compile(toolRegexp);
@@ -91,8 +91,10 @@ public class FZ12Program {
         // If the same tool place has more than one d number then we should calculate a
         // new station number for each dNo that tool place has.
         usedTools.toolPrint();
+        return usedTools;
     }
 
+   
 }
 
 

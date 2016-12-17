@@ -64,7 +64,7 @@ public class FXMLController implements Initializable {
     @FXML
     private void onBuildToolTree() {
         if (fZ12Program != null) {
-            fZ12Program.buildToolTreeFromMpf(usedTools);
+            usedTools = fZ12Program.buildToolTreeFromMpf();
             initTableView();
         }
     }

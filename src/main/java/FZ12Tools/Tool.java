@@ -12,7 +12,7 @@ import javafx.beans.property.SimpleStringProperty;
  *
  * @author matsandersson
  */
-class Tool {
+public class Tool {
     static final public int MAX_TOOL_NUMBER = 46;
     
     private final SimpleIntegerProperty tNo = new SimpleIntegerProperty();          // Tool number. 1 to MAX_TOOL_NUMBER
