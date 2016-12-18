@@ -40,14 +40,14 @@
     <center>
         <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <children>
-                <TabPane>
+                <TabPane fx:id="tabPane">
                     <tabs>
-                        <Tab text="MPF">
+                        <Tab fx:id="mpfTab" text="MPF">
                             <content>
                                 <TextArea fx:id="programTextArea" prefHeight="633.0" prefWidth="394.0" promptText="Textarea1" text="&#10;" />
                             </content>
                         </Tab>
-                        <Tab text="TOA">
+                        <Tab fx:id="toaTab" text="TOA">
                             <content>
                                 <TextArea fx:id="toaTextArea" prefHeight="633.0" prefWidth="394.0" promptText="Textarea1" text="&#10;" />
                             </content>

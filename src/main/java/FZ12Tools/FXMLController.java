@@ -9,6 +9,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -26,39 +28,41 @@ public class FXMLController implements Initializable {
     ToolCollection usedTools;
 
     @FXML
-    private TextArea programTextArea;
-    @FXML
-    private TextArea toaTextArea;
+    private TextArea programTextArea, toaTextArea;
     @FXML
     private TableView<Tool> tableView;
     @FXML
-    private TableColumn tNoCol;
+    private TableColumn tNoCol, dNoCol, l1ValueCol,
+            l2ValueCol, l3ValueCol, rValueCol;
     @FXML
-    private TableColumn dNoCol;
+    private TabPane tabPane;
     @FXML
-    private TableColumn l1ValueCol;
-    @FXML
-    private TableColumn l2ValueCol;
-    @FXML
-    private TableColumn l3ValueCol;
-    @FXML
-    private TableColumn rValueCol;
+    private Tab mpfTab, toaTab;
 
     @FXML
     private void onOpenToa() {
         toaToolDescription = ToaToolDescription.loadFromFile();
-        toaTextArea.setText(toaToolDescription.getToaText());
+        if ( toaToolDescription != null ) {
+            toaTextArea.setText(toaToolDescription.getToaText());
+            tabPane.getSelectionModel().select(toaTab);
+        }
     }
 
     @FXML
     private void onOpenMpf() {
         fZ12Program = FZ12Program.loadFromFile();
-        programTextArea.setText(fZ12Program.entireProgram);
+        if ( programTextArea != null ) {
+            programTextArea.setText(fZ12Program.entireProgram);
+            tabPane.getSelectionModel().select(mpfTab);
+        }
     }
 
     @FXML
     private void onLoadToolsFromToa() {
-
+        if ( toaToolDescription != null ) {
+                usedTools = toaToolDescription.buildToolTreeFromTOA();
+                initTableView();
+        }
     }
 
     @FXML

@@ -23,11 +23,20 @@ public class Tool {
     private final SimpleStringProperty rValue = new SimpleStringProperty();
     private final SimpleIntegerProperty slValue = new SimpleIntegerProperty();      // Cut location
     private final SimpleIntegerProperty toolType = new SimpleIntegerProperty();
-    private final SimpleStringProperty q_ofs = new SimpleStringProperty();     // Wear values for geometry.
-    private final SimpleStringProperty l_ofs = new SimpleStringProperty();
-    private final SimpleStringProperty h_ofs = new SimpleStringProperty();
+    private final SimpleStringProperty l1_ofs = new SimpleStringProperty();     // Wear values for geometry.
+    private final SimpleStringProperty l2_ofs = new SimpleStringProperty();
+    private final SimpleStringProperty l3_ofs = new SimpleStringProperty();
     private final SimpleStringProperty r_ofs = new SimpleStringProperty();
 
+    private final String TNO_TOA_VAR = "TC_TPC1[";
+    private final String L1VAL_TOA_VAR = "TC_DP3[";
+    private final String L2VAL_TOA_VAR = "TC_DP4[";
+    private final String L3VAL_TOA_VAR = "TC_DP5[";
+    private final String RVAL_TOA_VAR = "TC_DP6[";
+    private final String L1OFS_TOA_VAR = "TC_DP12[";
+    private final String L2OFS_TOA_VAR = "TC_DP13[";
+    private final String L3OFS_TOA_VAR = "TC_DP14[";
+    private final String ROFS_TOA_VAR = "TC_DP15[";
     
     public Tool() {
         
@@ -112,28 +121,28 @@ public class Tool {
         this.slValue.set(slValue);
     }
 
-    public String getQ_ofs() {
-        return q_ofs.get();
+    public String getL1_ofs() {
+        return l1_ofs.get();
     }
 
-    public void setQ_ofs(String q_ofs) {
-        this.q_ofs.set(q_ofs);
+    public void setL1_ofs(String l1_ofs) {
+        this.l1_ofs.set(l1_ofs);
     }
 
-    public String getL_ofs() {
-        return l_ofs.get();
+    public String getL2_ofs() {
+        return l2_ofs.get();
     }
 
-    public void setL_ofs(String l_ofs) {
-        this.l_ofs.set(l_ofs);
+    public void setL_ofs(String l2_ofs) {
+        this.l2_ofs.set(l2_ofs);
     }
 
-    public String getH_ofs() {
-        return h_ofs.get();
+    public String getL3_ofs() {
+        return l3_ofs.get();
     }
 
-    public void setH_ofs(String h_ofs) {
-        this.h_ofs.set(h_ofs);
+    public void setL3_ofs(String l3_ofs) {
+        this.l3_ofs.set(l3_ofs);
     }
 
     public String getR_ofs() {

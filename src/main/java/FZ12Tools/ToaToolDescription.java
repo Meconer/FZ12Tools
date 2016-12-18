@@ -31,7 +31,6 @@ class ToaToolDescription {
         return currentFilePath;
     }
 
-    
     public static ToaToolDescription loadFromFile() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Öppna TOA-fil");
@@ -53,6 +52,20 @@ class ToaToolDescription {
             }
         }
         return null;
+    }
+
+    ToolCollection buildToolTreeFromTOA() {
+        ToolCollection usedTools = new ToolCollection();
+        if ( toaText != null && !toaText.isEmpty()) {
+            for ( String toaLine : toaText.split("\n")) {
+                toaLine = toaLine.replaceAll("\r", "");
+                Tool tool = new Tool();
+                 
+            }
+        }
+        
+        
+        return usedTools;
     }
 
 }
