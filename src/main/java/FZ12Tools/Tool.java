@@ -5,8 +5,7 @@
  */
 package FZ12Tools;
 
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
+
 
 /**
  *
@@ -15,18 +14,18 @@ import javafx.beans.property.SimpleStringProperty;
 public class Tool {
     static final public int MAX_TOOL_NUMBER = 46;
     
-    private final SimpleIntegerProperty tNo = new SimpleIntegerProperty();          // Tool number. 1 to MAX_TOOL_NUMBER
-    private final SimpleIntegerProperty dNo = new SimpleIntegerProperty();          // Offset number.
-    private final SimpleStringProperty l1Value = new SimpleStringProperty();   // Geometry values for the tool.
-    private final SimpleStringProperty l2Value = new SimpleStringProperty();
-    private final SimpleStringProperty l3Value = new SimpleStringProperty();
-    private final SimpleStringProperty rValue = new SimpleStringProperty();
-    private final SimpleIntegerProperty slValue = new SimpleIntegerProperty();      // Cut location
-    private final SimpleIntegerProperty toolType = new SimpleIntegerProperty();
-    private final SimpleStringProperty l1_ofs = new SimpleStringProperty();     // Wear values for geometry.
-    private final SimpleStringProperty l2_ofs = new SimpleStringProperty();
-    private final SimpleStringProperty l3_ofs = new SimpleStringProperty();
-    private final SimpleStringProperty r_ofs = new SimpleStringProperty();
+    private  int tNo;          // Tool number. 1 to MAX_TOOL_NUMBER
+    private  int dNo;          // Offset number.
+    private  String l1Value;   // Geometry values for the tool.
+    private  String l2Value;
+    private  String l3Value;
+    private  String rValue;
+    private  int slValue;      // Cut location
+    private  int toolType;
+    private  String l1_ofs;     // Wear values for geometry.
+    private  String l2_ofs;
+    private  String l3_ofs;
+    private  String r_ofs;
 
     private final String TNO_TOA_VAR = "TC_TPC1[";
     private final String L1VAL_TOA_VAR = "TC_DP3[";
@@ -43,114 +42,114 @@ public class Tool {
     }
     
     public Tool( int tNo, int dNo, String l1Value, String lValue, String hValue, String rValue, int slValue) {
-        this.tNo.set(tNo);
-        this.dNo.set(dNo);
-        this.l1Value.set(l1Value);
-        this.l2Value.set(lValue);
-        this.l3Value.set(hValue);
-        this.rValue.set(rValue);
-        this.slValue.set(slValue);
+        this.tNo = tNo;
+        this.dNo = dNo;
+        this.l1Value = l1Value;
+        this.l2Value = lValue;
+        this.l3Value = hValue;
+        this.rValue = rValue;
+        this.slValue = slValue;
     }
 
     public Tool( int tNo, int dNo ) {
-        this.tNo.set(tNo);
-        this.dNo.set(dNo);
+        this.tNo = tNo;
+        this.dNo = dNo;
     }
 
     public int getTNo() {
-        return tNo.get();
+        return tNo;
     }
 
     public void setTNo(int tNo) {
-        this.tNo.set(tNo);
+        this.tNo = tNo;
     }
 
     public int getType() {
-        return toolType.get();
+        return toolType;
     }
 
     public void setType(int type) {
-        this.toolType.set(type);
+        this.toolType = type;
     }
 
     public int getDNo() {
-        return dNo.get();
+        return dNo;
     }
 
     public void setdNo(int dNo) {
-        this.dNo.set(dNo);
+        this.dNo = dNo;
     }
 
-    public String getqValue() {
-        return l1Value.get();
+    public String getL1Value() {
+        return l1Value;
     }
 
-    public void setqValue(String qValue) {
-        this.l1Value.set(qValue);
+    public void setL1Value(String l1Value) {
+        this.l1Value = l1Value;
     }
 
-    public String getlValue() {
-        return l2Value.get();
+    public String getL2Value() {
+        return l2Value;
     }
 
-    public void setlValue(String lValue) {
-        this.l2Value.set(lValue);
+    public void setL2Value(String l2Value) {
+        this.l2Value = l2Value;
     }
 
-    public String gethValue() {
-        return l3Value.get();
+    public String getL3Value() {
+        return l3Value;
     }
 
-    public void sethValue(String hValue) {
-        this.l3Value.set(hValue);
+    public void setL3Value(String l3Value) {
+        this.l3Value = l3Value;
     }
 
     public String getrValue() {
-        return rValue.get();
+        return rValue;
     }
 
     public void setrValue(String rValue) {
-        this.rValue.set(rValue);
+        this.rValue = rValue;
     }
 
     public int getSlValue() {
-        return slValue.get();
+        return slValue;
     }
 
     public void setSlValue(int slValue) {
-        this.slValue.set(slValue);
+        this.slValue = slValue;
     }
 
     public String getL1_ofs() {
-        return l1_ofs.get();
+        return l1_ofs;
     }
 
     public void setL1_ofs(String l1_ofs) {
-        this.l1_ofs.set(l1_ofs);
+        this.l1_ofs = l1_ofs;
     }
 
     public String getL2_ofs() {
-        return l2_ofs.get();
+        return l2_ofs;
     }
 
     public void setL_ofs(String l2_ofs) {
-        this.l2_ofs.set(l2_ofs);
+        this.l2_ofs = l2_ofs;
     }
 
     public String getL3_ofs() {
-        return l3_ofs.get();
+        return l3_ofs;
     }
 
     public void setL3_ofs(String l3_ofs) {
-        this.l3_ofs.set(l3_ofs);
+        this.l3_ofs = l3_ofs;
     }
 
     public String getR_ofs() {
-        return r_ofs.get();
+        return r_ofs;
     }
 
     public void setR_ofs(String r_ofs) {
-        this.r_ofs.set(r_ofs);
+        this.r_ofs = r_ofs;
     }
     
     @Override
