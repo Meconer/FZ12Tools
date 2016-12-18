@@ -34,11 +34,11 @@ class ToolCollection {
         collection.add(tool);
     }
 
-    public boolean toolExist(int tNo , int dNo) {
+    public boolean toolExist(int tNo, int dNo) {
         Iterator<Tool> toolIterator = collection.iterator();
         while (toolIterator.hasNext()) {
             Tool tool = toolIterator.next();
-            if (tool.getDNo() == dNo && tool.getTNo() == tNo ) {
+            if (tool.getDNo() == dNo && tool.getTNo() == tNo) {
                 return true;
             }
         }
@@ -73,6 +73,18 @@ class ToolCollection {
             }
         }
         return toolListByPlace;
+    }
+
+    Tool getTool(int tNo, int dNo) {
+        Iterator<Tool> toolIterator = collection.iterator();
+        while (toolIterator.hasNext()) {
+            Tool tool = toolIterator.next();
+            if (tool.getDNo() == dNo && tool.getTNo() == tNo) {
+                return tool;
+            }
+        }
+        return null;
+
     }
 
 }
