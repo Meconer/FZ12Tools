@@ -30,15 +30,15 @@ public class Tool {
     private  String l3_ofs;
     private  String r_ofs;
 
-    private static final String TNO_TOA_VAR = "TC_TPC1\\[(\\d+)";
-    private static final String L1VAL_TOA_VAR = "TC_DP3\\[(\\d+),(\\d+)\\]";
-    private static final String L2VAL_TOA_VAR = "TC_DP4\\[(\\d+),(\\d+)";
-    private static final String L3VAL_TOA_VAR = "TC_DP5\\[(\\d+),(\\d+)";
-    private static final String RVAL_TOA_VAR = "TC_DP6\\[(\\d+),(\\d+)";
-    private static final String L1OFS_TOA_VAR = "TC_DP12\\[(\\d+),(\\d+)";
-    private static final String L2OFS_TOA_VAR = "TC_DP13\\[(\\d+),(\\d+)";
-    private static final String L3OFS_TOA_VAR = "TC_DP14\\[(\\d+),(\\d+)";
-    private static final String ROFS_TOA_VAR = "TC_DP15\\[(\\d+),(\\d+)";
+    private static final String TNO_TOA_VAR = "\\$TC_TPC1\\[(\\d+)\\]\\s*=\\s*([+-]?([0-9]*[.])?[0-9]+)";
+    private static final String L1VAL_TOA_VAR = "\\$TC_DP3\\[(\\d+),(\\d+)\\]\\s*=\\s*([+-]?([0-9]*[.])?[0-9]+)";
+    private static final String L2VAL_TOA_VAR = "\\$TC_DP4\\[(\\d+),(\\d+)\\]\\s*=\\s*([+-]?([0-9]*[.])?[0-9]+)";
+    private static final String L3VAL_TOA_VAR = "\\$TC_DP5\\[(\\d+),(\\d+)\\]\\s*=\\s*([+-]?([0-9]*[.])?[0-9]+)";
+    private static final String RVAL_TOA_VAR = "\\$TC_DP6\\[(\\d+),(\\d+)\\]\\s*=\\s*([+-]?([0-9]*[.])?[0-9]+)";
+    private static final String L1OFS_TOA_VAR = "\\$TC_DP12\\[(\\d+),(\\d+)\\]\\s*=\\s*([+-]?([0-9]*[.])?[0-9]+)";
+    private static final String L2OFS_TOA_VAR = "\\$TC_DP13\\[(\\d+),(\\d+)\\]\\s*=\\s*([+-]?([0-9]*[.])?[0-9]+)";
+    private static final String L3OFS_TOA_VAR = "\\$TC_DP14\\[(\\d+),(\\d+)\\]\\s*=\\s*([+-]?([0-9]*[.])?[0-9]+)";
+    private static final String ROFS_TOA_VAR = "\\$TC_DP15\\[(\\d+),(\\d+)\\]\\s*=\\s*([+-]?([0-9]*[.])?[0-9]+)";
     
     private static final Pattern TNO_TOA_PATTERN = Pattern.compile(TNO_TOA_VAR);
     private static final Pattern L1VAL_TOA_PATTERN = Pattern.compile(L1VAL_TOA_VAR);
@@ -172,7 +172,7 @@ public class Tool {
     }
     
     static int getTNoFromToaLine(String toaLine) {
-        Pattern tNoPattern = Pattern.compile(".*\\[(\\d+)");
+        Pattern tNoPattern = Pattern.compile(".*\\[(\\d+).*");
         Matcher m = tNoPattern.matcher(toaLine);
         if ( m.matches()) {
             String s = m.group(1);
@@ -183,7 +183,7 @@ public class Tool {
     }
     
     static int getDNoFromToaLine(String toaLine) {
-        Pattern dNoPattern = Pattern.compile(".*,(\\d+)\\]");
+        Pattern dNoPattern = Pattern.compile(".*,(\\d+)\\].*");
         Matcher m = dNoPattern.matcher(toaLine);
         if ( m.matches()) {
             String s = m.group(1);
@@ -196,7 +196,7 @@ public class Tool {
     void addParameterFromToaLine(String toaLine) {
         Matcher m = L1VAL_TOA_PATTERN.matcher(toaLine);
         if ( m.matches()) {
-            l1Value = m.group(1);
+            l1Value = m.group(3);
         }
     }
     

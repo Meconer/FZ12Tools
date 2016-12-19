@@ -51,7 +51,7 @@ public class FXMLController implements Initializable {
     @FXML
     private void onOpenMpf() {
         fZ12Program = FZ12Program.loadFromFile();
-        if ( programTextArea != null ) {
+        if ( fZ12Program != null ) {
             programTextArea.setText(fZ12Program.entireProgram);
             tabPane.getSelectionModel().select(mpfTab);
         }

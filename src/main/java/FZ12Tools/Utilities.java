@@ -26,5 +26,9 @@ class Utilities {
             return new File( System.getProperty("user.home") + "\\Documents");
         }
     }
+
+    static String removeComment(String s) {
+        return s.replaceAll(";.*", "");
+    }
     
 }
