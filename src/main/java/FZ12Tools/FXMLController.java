@@ -26,9 +26,10 @@ public class FXMLController implements Initializable {
     FZ12Program fZ12Program = null;
     ToaToolDescription toaToolDescription = null;
     ToolCollection usedTools;
+    ZollerValues zollerValues = null;
 
     @FXML
-    private TextArea programTextArea, toaTextArea;
+    private TextArea programTextArea, toaTextArea, zollerTextArea;
     @FXML
     private TableView<Tool> tableView;
     @FXML
@@ -39,7 +40,7 @@ public class FXMLController implements Initializable {
     @FXML
     private TabPane tabPane;
     @FXML
-    private Tab mpfTab, toaTab;
+    private Tab mpfTab, toaTab, zollerTab;
 
     @FXML
     private void onOpenToa() {
@@ -56,6 +57,15 @@ public class FXMLController implements Initializable {
         if ( fZ12Program != null ) {
             programTextArea.setText(fZ12Program.entireProgram);
             tabPane.getSelectionModel().select(mpfTab);
+        }
+    }
+
+    @FXML
+    private void onOpenZollerFile() {
+        zollerValues = ZollerValues.loadFromFile();
+        if ( zollerValues != null ) {
+            zollerTextArea.setText(zollerValues.text);
+            tabPane.getSelectionModel().select(zollerTab);
         }
     }
 

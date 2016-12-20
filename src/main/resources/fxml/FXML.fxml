@@ -19,6 +19,7 @@
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#onOpenMpf" text="Öppna cncprogram" />
                         <MenuItem mnemonicParsing="false" onAction="#onOpenToa" text="Öppna TOA-fil" />
+                        <MenuItem mnemonicParsing="false" onAction="#onOpenZollerFile" text="Öppna zoller-fil" />
                         <MenuItem mnemonicParsing="false" onAction="#onClose" text="Avsluta" />
                     </items>
                 </Menu>
@@ -43,12 +44,17 @@
                     <tabs>
                         <Tab fx:id="mpfTab" text="MPF">
                             <content>
-                                <TextArea fx:id="programTextArea" prefHeight="633.0" prefWidth="394.0" promptText="Textarea1" text="&#10;" />
+                                <TextArea fx:id="programTextArea" prefHeight="633.0" prefWidth="394.0" promptText="" text="&#10;" />
                             </content>
                         </Tab>
                         <Tab fx:id="toaTab" text="TOA">
                             <content>
-                                <TextArea fx:id="toaTextArea" prefHeight="633.0" prefWidth="394.0" promptText="Textarea1" text="&#10;" />
+                                <TextArea fx:id="toaTextArea" prefHeight="633.0" prefWidth="394.0" promptText="" text="&#10;" />
+                            </content>
+                        </Tab>
+                        <Tab fx:id="zollerTab" text="Zoller">
+                            <content>
+                                <TextArea fx:id="zollerTextArea" prefHeight="633.0" prefWidth="394.0" promptText="" text="&#10;" />
                             </content>
                         </Tab>
                     </tabs>
