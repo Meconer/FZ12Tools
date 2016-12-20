@@ -32,7 +32,7 @@ public class FXMLController implements Initializable {
     @FXML
     private TableView<Tool> tableView;
     @FXML
-    private TableColumn tNoCol, dNoCol, l1ValueCol,
+    private TableColumn tNoCol, dNoCol, typeCol, slValueCol, l1ValueCol,
             l2ValueCol, l3ValueCol, rValueCol;
     @FXML
     private TableColumn l1OfsCol, l2OfsCol, l3OfsCol, rOfsCol;
@@ -87,6 +87,8 @@ public class FXMLController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -94,9 +96,10 @@ public class FXMLController implements Initializable {
     }
 
     private void initTableView() {
-        
         tNoCol.setCellValueFactory( new PropertyValueFactory<>("tNo"));
         dNoCol.setCellValueFactory( new PropertyValueFactory<>("dNo"));
+        typeCol.setCellValueFactory(new PropertyValueFactory<>("toolType"));
+        slValueCol.setCellValueFactory(new PropertyValueFactory<>("slValue"));
         l1ValueCol.setCellValueFactory(new PropertyValueFactory<>("l1Value"));
         l2ValueCol.setCellValueFactory(new PropertyValueFactory<>("l2Value"));
         l3ValueCol.setCellValueFactory(new PropertyValueFactory<>("l3Value"));

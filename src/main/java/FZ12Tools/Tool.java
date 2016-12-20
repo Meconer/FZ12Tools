@@ -31,6 +31,8 @@ public class Tool {
     private  String rOfs;
 
     private static final String TNO_TOA_VAR = "\\$TC_TPC1\\[(\\d+)\\]\\s*=\\s*([+-]?([0-9]*[.])?[0-9]+)";
+    private static final String TYPE_TOA_VAR = "\\$TC_DP1\\[(\\d+),(\\d+)\\]\\s*=\\s*([0-9]+)";
+    private static final String TYPE_SL_VAR = "\\$TC_DP2\\[(\\d+),(\\d+)\\]\\s*=\\s*([0-9]+)";
     private static final String L1VAL_TOA_VAR = "\\$TC_DP3\\[(\\d+),(\\d+)\\]\\s*=\\s*([+-]?([0-9]*[.])?[0-9]+)";
     private static final String L2VAL_TOA_VAR = "\\$TC_DP4\\[(\\d+),(\\d+)\\]\\s*=\\s*([+-]?([0-9]*[.])?[0-9]+)";
     private static final String L3VAL_TOA_VAR = "\\$TC_DP5\\[(\\d+),(\\d+)\\]\\s*=\\s*([+-]?([0-9]*[.])?[0-9]+)";
@@ -41,6 +43,8 @@ public class Tool {
     private static final String ROFS_TOA_VAR = "\\$TC_DP15\\[(\\d+),(\\d+)\\]\\s*=\\s*([+-]?([0-9]*[.])?[0-9]+)";
     
     private static final Pattern TNO_TOA_PATTERN = Pattern.compile(TNO_TOA_VAR);
+    private static final Pattern TYPE_TOA_PATTERN = Pattern.compile(TYPE_TOA_VAR);
+    private static final Pattern TYPE_SL_PATTERN = Pattern.compile(TYPE_SL_VAR);
     private static final Pattern L1VAL_TOA_PATTERN = Pattern.compile(L1VAL_TOA_VAR);
     private static final Pattern L2VAL_TOA_PATTERN = Pattern.compile(L2VAL_TOA_VAR);
     private static final Pattern L3VAL_TOA_PATTERN = Pattern.compile(L3VAL_TOA_VAR);
@@ -78,12 +82,12 @@ public class Tool {
         this.tNo = tNo;
     }
 
-    public int getType() {
+    public int getToolType() {
         return toolType;
     }
 
-    public void setType(int type) {
-        this.toolType = type;
+    public void setToolType(int toolType) {
+        this.toolType = toolType;
     }
 
     public int getDNo() {
@@ -194,9 +198,24 @@ public class Tool {
     }
 
     void addParameterFromToaLine(String toaLine) {
+        toaLine = toaLine.replaceAll(" ", "");
         Matcher m = L1VAL_TOA_PATTERN.matcher(toaLine);
         if ( m.matches()) {
             l1Value = m.group(3);
+            return;
+        }
+        
+        m = TYPE_TOA_PATTERN.matcher(toaLine);
+        if ( m.matches()) {
+            String s = m.group(3);
+            toolType = Integer.parseInt(m.group(3));
+            return;
+        }
+        
+        m = TYPE_SL_PATTERN.matcher(toaLine);
+        if ( m.matches()) {
+            String s = m.group(3);
+            slValue = Integer.parseInt(m.group(3));
             return;
         }
         
@@ -239,7 +258,6 @@ public class Tool {
         m = ROFS_TOA_PATTERN.matcher(toaLine);
         if ( m.matches()) {
             rOfs = m.group(3);
-            return;
         }
         
     }

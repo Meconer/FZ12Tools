@@ -63,12 +63,14 @@ class ToaToolDescription {
                 int tNo = Tool.getTNoFromToaLine(toaLine);
                 int dNo = Tool.getDNoFromToaLine(toaLine);
                 if ( tNo > 0 && dNo > 0 ) {
+                    Tool tool;
                     if ( usedTools.toolExist(tNo, dNo)) {
-                        Tool tool = usedTools.getTool(tNo, dNo);
-                        tool.addParameterFromToaLine(toaLine);
+                        tool = usedTools.getTool(tNo, dNo);
                     } else {
                         usedTools.addTool(tNo, dNo);
+                        tool = usedTools.getTool(tNo, dNo);
                     }
+                    tool.addParameterFromToaLine(toaLine);
                 }
             }
         }

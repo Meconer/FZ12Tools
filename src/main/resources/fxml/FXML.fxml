@@ -37,7 +37,7 @@
         </MenuBar>
     </top>
     <center>
-      <SplitPane dividerPositions="0.35892514395393477">
+      <SplitPane dividerPositions="0.3">
          <items>
                 <TabPane fx:id="tabPane" prefWidth="321.0">
                     <tabs>
@@ -57,6 +57,8 @@
                     <columns>
                         <TableColumn fx:id="tNoCol" prefWidth="40.0" text="T nr" />
                         <TableColumn fx:id="dNoCol" prefWidth="40.0" text="D nr" />
+                        <TableColumn fx:id="typeCol" prefWidth="50.0" text="Typ" />
+                        <TableColumn fx:id="slValueCol" prefWidth="40.0" text="SL" />
                         <TableColumn fx:id="l1ValueCol" prefWidth="65.0" text="Längd 1" />
                         <TableColumn fx:id="l2ValueCol" prefWidth="65.0" text="Längd 2" />
                         <TableColumn fx:id="l3ValueCol" prefWidth="65.0" text="Längd 3" />
