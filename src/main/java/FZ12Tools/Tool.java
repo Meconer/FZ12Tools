@@ -5,6 +5,7 @@
  */
 package FZ12Tools;
 
+import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,6 +17,11 @@ import java.util.regex.Pattern;
  */
 public class Tool {
     static final public int MAX_TOOL_NUMBER = 46;
+
+    static Tool getToolFromZollerLine(String zollerLine) {
+        StringTokenizer st = new StringTokenizer(zollerLine, " ");
+        return null;
+    }
 
     private  int tNo;          // Tool number. 1 to MAX_TOOL_NUMBER
     private  int dNo;          // Offset number.

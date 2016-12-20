@@ -27,6 +27,7 @@
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#onLoadToolsFromToa" text="Ladda verktyg från TOA" />
                         <MenuItem mnemonicParsing="false" onAction="#onBuildToolTree" text="Skapa verktygstabell från MPF" />
+                        <MenuItem mnemonicParsing="false" onAction="#onFillInFromZoller" text="Fyll i värden från zoller-fil" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">

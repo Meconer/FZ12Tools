@@ -45,7 +45,7 @@ public class FXMLController implements Initializable {
     @FXML
     private void onOpenToa() {
         toaToolDescription = ToaToolDescription.loadFromFile();
-        if ( toaToolDescription != null ) {
+        if (toaToolDescription != null) {
             toaTextArea.setText(toaToolDescription.getToaText());
             tabPane.getSelectionModel().select(toaTab);
         }
@@ -54,7 +54,7 @@ public class FXMLController implements Initializable {
     @FXML
     private void onOpenMpf() {
         fZ12Program = FZ12Program.loadFromFile();
-        if ( fZ12Program != null ) {
+        if (fZ12Program != null) {
             programTextArea.setText(fZ12Program.entireProgram);
             tabPane.getSelectionModel().select(mpfTab);
         }
@@ -63,7 +63,7 @@ public class FXMLController implements Initializable {
     @FXML
     private void onOpenZollerFile() {
         zollerValues = ZollerValues.loadFromFile();
-        if ( zollerValues != null ) {
+        if (zollerValues != null) {
             zollerTextArea.setText(zollerValues.text);
             tabPane.getSelectionModel().select(zollerTab);
         }
@@ -71,9 +71,9 @@ public class FXMLController implements Initializable {
 
     @FXML
     private void onLoadToolsFromToa() {
-        if ( toaToolDescription != null ) {
-                usedTools = toaToolDescription.buildToolTreeFromTOA();
-                initTableView();
+        if (toaToolDescription != null) {
+            usedTools = toaToolDescription.buildToolTreeFromTOA();
+            initTableView();
         }
     }
 
@@ -82,6 +82,15 @@ public class FXMLController implements Initializable {
         if (fZ12Program != null) {
             usedTools = fZ12Program.buildToolTreeFromMpf();
             initTableView();
+        }
+    }
+
+    @FXML
+    private void onFillInFromZoller() {
+        if (zollerValues != null) {
+            if (usedTools != null) {
+                zollerValues.fillInToolCollection(usedTools);
+            }
         }
     }
 
@@ -97,6 +106,7 @@ public class FXMLController implements Initializable {
 
     /**
      * Initializes the controller class.
+     *
      * @param url
      * @param rb
      */
@@ -106,8 +116,8 @@ public class FXMLController implements Initializable {
     }
 
     private void initTableView() {
-        tNoCol.setCellValueFactory( new PropertyValueFactory<>("tNo"));
-        dNoCol.setCellValueFactory( new PropertyValueFactory<>("dNo"));
+        tNoCol.setCellValueFactory(new PropertyValueFactory<>("tNo"));
+        dNoCol.setCellValueFactory(new PropertyValueFactory<>("dNo"));
         typeCol.setCellValueFactory(new PropertyValueFactory<>("toolType"));
         slValueCol.setCellValueFactory(new PropertyValueFactory<>("slValue"));
         l1ValueCol.setCellValueFactory(new PropertyValueFactory<>("l1Value"));
