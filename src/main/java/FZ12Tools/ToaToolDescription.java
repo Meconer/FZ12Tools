@@ -62,7 +62,7 @@ class ToaToolDescription {
                 toaLine = Utilities.removeComment(toaLine);
                 int tNo = Tool.getTNoFromToaLine(toaLine);
                 int dNo = Tool.getDNoFromToaLine(toaLine);
-                if ( tNo != -1 && dNo != -1 ) {
+                if ( tNo > 0 && dNo > 0 ) {
                     if ( usedTools.toolExist(tNo, dNo)) {
                         Tool tool = usedTools.getTool(tNo, dNo);
                         tool.addParameterFromToaLine(toaLine);

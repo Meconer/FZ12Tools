@@ -35,6 +35,8 @@ public class FXMLController implements Initializable {
     private TableColumn tNoCol, dNoCol, l1ValueCol,
             l2ValueCol, l3ValueCol, rValueCol;
     @FXML
+    private TableColumn l1OfsCol, l2OfsCol, l3OfsCol, rOfsCol;
+    @FXML
     private TabPane tabPane;
     @FXML
     private Tab mpfTab, toaTab;
@@ -99,6 +101,10 @@ public class FXMLController implements Initializable {
         l2ValueCol.setCellValueFactory(new PropertyValueFactory<>("l2Value"));
         l3ValueCol.setCellValueFactory(new PropertyValueFactory<>("l3Value"));
         rValueCol.setCellValueFactory(new PropertyValueFactory<>("rValue"));
+        l1OfsCol.setCellValueFactory(new PropertyValueFactory<>("l1Ofs"));
+        l2OfsCol.setCellValueFactory(new PropertyValueFactory<>("l2Ofs"));
+        l3OfsCol.setCellValueFactory(new PropertyValueFactory<>("l3Ofs"));
+        rOfsCol.setCellValueFactory(new PropertyValueFactory<>("rOfs"));
         tableView.setItems(usedTools.collection);
     }
 

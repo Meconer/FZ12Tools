@@ -25,10 +25,10 @@ public class Tool {
     private  String rValue;
     private  int slValue;      // Cut location
     private  int toolType;
-    private  String l1_ofs;     // Wear values for geometry.
-    private  String l2_ofs;
-    private  String l3_ofs;
-    private  String r_ofs;
+    private  String l1Ofs;     // Wear values for geometry.
+    private  String l2Ofs;
+    private  String l3Ofs;
+    private  String rOfs;
 
     private static final String TNO_TOA_VAR = "\\$TC_TPC1\\[(\\d+)\\]\\s*=\\s*([+-]?([0-9]*[.])?[0-9]+)";
     private static final String L1VAL_TOA_VAR = "\\$TC_DP3\\[(\\d+),(\\d+)\\]\\s*=\\s*([+-]?([0-9]*[.])?[0-9]+)";
@@ -118,11 +118,11 @@ public class Tool {
         this.l3Value = l3Value;
     }
 
-    public String getrValue() {
+    public String getRValue() {
         return rValue;
     }
 
-    public void setrValue(String rValue) {
+    public void setRValue(String rValue) {
         this.rValue = rValue;
     }
 
@@ -134,36 +134,36 @@ public class Tool {
         this.slValue = slValue;
     }
 
-    public String getL1_ofs() {
-        return l1_ofs;
+    public String getL1Ofs() {
+        return l1Ofs;
     }
 
-    public void setL1_ofs(String l1_ofs) {
-        this.l1_ofs = l1_ofs;
+    public void setL1Ofs(String l1Ofs) {
+        this.l1Ofs = l1Ofs;
     }
 
-    public String getL2_ofs() {
-        return l2_ofs;
+    public String getL2Ofs() {
+        return l2Ofs;
     }
 
-    public void setL_ofs(String l2_ofs) {
-        this.l2_ofs = l2_ofs;
+    public void setL2Ofs(String l2Ofs) {
+        this.l2Ofs = l2Ofs;
     }
 
-    public String getL3_ofs() {
-        return l3_ofs;
+    public String getL3Ofs() {
+        return l3Ofs;
     }
 
-    public void setL3_ofs(String l3_ofs) {
-        this.l3_ofs = l3_ofs;
+    public void setL3Ofs(String l3Ofs) {
+        this.l3Ofs = l3Ofs;
     }
 
-    public String getR_ofs() {
-        return r_ofs;
+    public String getROfs() {
+        return rOfs;
     }
 
-    public void setR_ofs(String r_ofs) {
-        this.r_ofs = r_ofs;
+    public void setROfs(String rOfs) {
+        this.rOfs = rOfs;
     }
     
     @Override
@@ -197,7 +197,51 @@ public class Tool {
         Matcher m = L1VAL_TOA_PATTERN.matcher(toaLine);
         if ( m.matches()) {
             l1Value = m.group(3);
+            return;
         }
+        
+        m = L2VAL_TOA_PATTERN.matcher(toaLine);
+        if ( m.matches()) {
+            l2Value = m.group(3);
+            return;
+        }
+        
+        m = L3VAL_TOA_PATTERN.matcher(toaLine);
+        if ( m.matches()) {
+            l3Value = m.group(3);
+            return;
+        }
+        
+        m = RVAL_TOA_PATTERN.matcher(toaLine);
+        if ( m.matches()) {
+            rValue = m.group(3);
+            return;
+        }
+        
+        m = L1OFS_TOA_PATTERN.matcher(toaLine);
+        if ( m.matches()) {
+            l1Ofs = m.group(3);
+            return;
+        }
+        
+        m = L2OFS_TOA_PATTERN.matcher(toaLine);
+        if ( m.matches()) {
+            l2Ofs = m.group(3);
+            return;
+        }
+        
+        m = L3OFS_TOA_PATTERN.matcher(toaLine);
+        if ( m.matches()) {
+            l3Ofs = m.group(3);
+            return;
+        }
+        
+        m = ROFS_TOA_PATTERN.matcher(toaLine);
+        if ( m.matches()) {
+            rOfs = m.group(3);
+            return;
+        }
+        
     }
     
     
