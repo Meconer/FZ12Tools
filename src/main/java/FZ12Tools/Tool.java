@@ -24,7 +24,7 @@ public class Tool {
     private  String l3Value;
     private  String rValue;
     private  int slValue;      // Cut location
-    private  int toolType;
+    private  int toolType;     // Tool type
     private  String l1Ofs;     // Wear values for geometry.
     private  String l2Ofs;
     private  String l3Ofs;

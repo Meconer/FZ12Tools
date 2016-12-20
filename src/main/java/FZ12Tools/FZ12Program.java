@@ -52,10 +52,15 @@ public class FZ12Program {
         ToolCollection usedTools = new ToolCollection();
         String toolRegexp = ".*(T\\d+).*";
         String dNoRegexp = ".*(D\\d+).*";
+        String turnOnRegexp = ".*_TURN[V|H]";
+        String turnOffRegexp = ".*_TURN_OFF";
         Pattern toolPattern = Pattern.compile(toolRegexp);
         Pattern dNoPattern = Pattern.compile(dNoRegexp);
+        Pattern turnOnPattern = Pattern.compile(turnOnRegexp);
+        Pattern turnOffPattern = Pattern.compile(turnOffRegexp);
 
         int currentToolNo = 0;
+        boolean isTurning = false;
 
         // Check each line
         for (String line : entireProgram.split("\n")) {
@@ -68,11 +73,22 @@ public class FZ12Program {
             // make it in uppercase
             line = line.toUpperCase();
 
+            // Check if the line turns on or off turning mode
+            Matcher m = turnOnPattern.matcher(line);
+            if (m.matches()) {
+                isTurning = true;
+            }
+
+            m = turnOffPattern.matcher(line);
+            if (m.matches()) {
+                isTurning = false;
+            }
+
             // Check if the line has a T number. If so, set the current tool number
-            Matcher m = toolPattern.matcher(line);
+            m = toolPattern.matcher(line);
             if (m.matches()) {
                 String toolNumber = m.group(1);
-                int toolNo = Integer.parseInt( toolNumber.substring(1) );
+                int toolNo = Integer.parseInt(toolNumber.substring(1));
                 currentToolNo = toolNo;
             }
 
@@ -82,8 +98,18 @@ public class FZ12Program {
                 String dString = m.group(1);
                 int dNo = Integer.parseInt(dString.substring(1));
                 if ((currentToolNo != 0) && (dNo != 0)) {
-                    usedTools.addTool( currentToolNo, dNo);
-
+                    usedTools.addTool(currentToolNo, dNo);
+                    Tool tool = usedTools.getTool(currentToolNo, dNo);
+                    if (isTurning) {
+                        tool.setToolType(510);
+                    } else {
+                        tool.setToolType(120);
+                    }
+                    tool.setL1Value("0");
+                    tool.setL2Value("0");
+                    tool.setL3Value("0");
+                    tool.setRValue("0");
+                    tool.setSlValue(3);
                 }
             }
         }
@@ -94,7 +120,4 @@ public class FZ12Program {
         return usedTools;
     }
 
-   
 }
-
-
