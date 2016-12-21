@@ -70,9 +70,9 @@ class ToaToolDescription {
 
     ToolCollection buildToolTreeFromTOA() {
         ToolCollection usedTools = new ToolCollection();
+        String ls = System.lineSeparator();
         if (toaText != null && !toaText.isEmpty()) {
-            for (String toaLine : toaText.split("\n")) {
-                toaLine = toaLine.replaceAll("\r", "");
+            for (String toaLine : toaText.split(ls)) {
                 toaLine = Utilities.removeComment(toaLine);
                 int tNo = Tool.getTNoFromToaLine(toaLine);
                 int dNo = Tool.getDNoFromToaLine(toaLine);

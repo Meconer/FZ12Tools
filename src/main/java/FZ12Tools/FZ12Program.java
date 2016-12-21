@@ -62,12 +62,12 @@ public class FZ12Program {
         int currentToolNo = 0;
         boolean isTurning = false;
 
+        String ls = System.lineSeparator();
         // Check each line
-        for (String line : entireProgram.split("\n")) {
+        for (String line : entireProgram.split(ls)) {
 
-            line = line.replace("\r", "");
             // Now remove all comments
-            line = line.replaceAll(";.*", "");
+            line = Utilities.removeComment(line);
             // and also remove everything in parenthesis
             line = line.replaceAll("\\(.*?\\)", "");
             // make it in uppercase
