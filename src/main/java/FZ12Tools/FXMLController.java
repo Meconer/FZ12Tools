@@ -27,6 +27,7 @@ public class FXMLController implements Initializable {
     ToaToolDescription toaToolDescription = null;
     ToolCollection usedTools;
     ZollerValues zollerValues = null;
+    boolean tableViewHasValues = false;
 
     @FXML
     private TextArea programTextArea, toaTextArea, zollerTextArea;
@@ -91,6 +92,15 @@ public class FXMLController implements Initializable {
             if (usedTools != null) {
                 zollerValues.fillInToolCollection(usedTools);
             }
+            tableView.refresh();
+        }
+    }
+    
+    @FXML
+    private void onBuildToaFromTable() {
+        if ( tableViewHasValues ) {
+            toaToolDescription = ToaToolDescription.buildFromToolTable( usedTools );
+            toaTextArea.setText(toaToolDescription.getToaText());
         }
     }
 
@@ -128,7 +138,10 @@ public class FXMLController implements Initializable {
         l2OfsCol.setCellValueFactory(new PropertyValueFactory<>("l2Ofs"));
         l3OfsCol.setCellValueFactory(new PropertyValueFactory<>("l3Ofs"));
         rOfsCol.setCellValueFactory(new PropertyValueFactory<>("rOfs"));
-        tableView.setItems(usedTools.collection);
+        if ( !usedTools.collection.isEmpty()) {
+            tableView.setItems(usedTools.collection);
+            tableViewHasValues = true;
+        }
     }
 
 }

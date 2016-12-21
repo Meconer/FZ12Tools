@@ -42,8 +42,13 @@ class ZollerValues {
     }
 
     void fillInToolCollection(ToolCollection usedTools) {
-        for ( String zollerLine : text.split("\n")) {
+        for ( String zollerLine : text.split(System.lineSeparator())) {
             Tool zollerTool = Tool.getToolFromZollerLine( zollerLine );
+            Tool tool = usedTools.getTool(zollerTool.getTNo(), zollerTool.getDNo());
+            if ( tool != null ) {
+                tool.copyFromZollerValues( zollerTool );
+            }
+            
         }
     }
     

@@ -5,7 +5,6 @@
  */
 package FZ12Tools;
 
-import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,12 +15,7 @@ import java.util.regex.Pattern;
  * @author matsandersson
  */
 public class Tool {
-    static final public int MAX_TOOL_NUMBER = 46;
-
-    static Tool getToolFromZollerLine(String zollerLine) {
-        StringTokenizer st = new StringTokenizer(zollerLine, " ");
-        return null;
-    }
+    static final public int MAX_TOOL_NUMBER = 48;
 
     private  int tNo;          // Tool number. 1 to MAX_TOOL_NUMBER
     private  int dNo;          // Offset number.
@@ -62,10 +56,22 @@ public class Tool {
     private static final Pattern ROFS_TOA_PATTERN = Pattern.compile(ROFS_TOA_VAR);
     
     public Tool() {
-        
+        this.tNo = -1;
+        this.dNo = -1;
+        this.toolType = 120;
+        this.slValue = 3;
+        this.l1Value = "0";
+        this.l2Value = "0";
+        this.l3Value = "0";
+        this.rValue = "0";
+        this.l1Ofs = "0";
+        this.l2Ofs = "0";
+        this.l3Ofs = "0";
+        this.rOfs = "0";
     }
     
     public Tool( int tNo, int dNo, String l1Value, String lValue, String hValue, String rValue, int slValue) {
+        this();
         this.tNo = tNo;
         this.dNo = dNo;
         this.l1Value = l1Value;
@@ -76,6 +82,7 @@ public class Tool {
     }
 
     public Tool( int tNo, int dNo ) {
+        this();
         this.tNo = tNo;
         this.dNo = dNo;
     }
@@ -181,6 +188,58 @@ public class Tool {
         return "T=" + getTNo() + " D=" + getDNo();
     }
     
+    private static int valueToInt(String value) {
+        try {
+            return Integer.parseInt(value);
+        } catch ( NumberFormatException e ) {
+            return -1;
+        }
+    }
+
+        static Tool getToolFromZollerLine(String zollerLine) {
+        String[] paramAssignments = zollerLine.split(" ");
+        Tool tool = new Tool();
+        for (String paramAssignment : paramAssignments ) {
+            String[] assignment = paramAssignment.split("=");
+            if ( assignment.length == 2 ) {
+                String key = assignment[0];
+                String value = assignment[1];
+
+                switch ( key ) {
+                    case "T" : 
+                        tool.setTNo( valueToInt( value ) );
+                        break;
+
+                    case "D" :
+                        tool.setdNo( valueToInt( value ) ); 
+                        break;
+
+                    case "TYP" :
+                        tool.setToolType( valueToInt( value ) ); 
+                        break;
+
+                    case "SL" :
+                        tool.setSlValue( valueToInt( value ) );
+                        break;
+                        
+                    case "L1" :
+                        tool.setL1Value(value);
+                        break;
+                        
+                    case "L2" :
+                        tool.setL2Value(value);
+                        break;
+                        
+                    case "R" :
+                        tool.setRValue(value);
+                        break;
+                        
+                }
+            }
+        }
+        return tool;
+    }
+
     static int getTNoFromToaLine(String toaLine) {
         Pattern tNoPattern = Pattern.compile(".*\\[(\\d+).*");
         Matcher m = tNoPattern.matcher(toaLine);
@@ -266,6 +325,112 @@ public class Tool {
             rOfs = m.group(3);
         }
         
+    }
+
+    void copyFromZollerValues(Tool zollerTool) {
+        this.tNo = zollerTool.tNo;
+        this.dNo = zollerTool.dNo;
+        this.toolType = zollerTool.toolType;
+        this.slValue = zollerTool.slValue;
+        this.l1Value = zollerTool.l1Value;
+        this.l2Value = zollerTool.l2Value;
+        this.l3Value = zollerTool.l3Value;
+        this.rValue = zollerTool.rValue;
+    }
+
+    public String getToaLines() {
+        StringBuilder sb = new StringBuilder();
+        String ls = System.lineSeparator();
+        String tolerance = "5.0";
+        
+        sb.append("$TC_TPC1[").append(tNo).append("]=").append(tNo).append(ls); // Id 1
+        sb.append("$TC_TPC2[").append(tNo).append("]=").append(tNo).append(ls); // Id 2
+        sb.append("$TC_TPC3[").append(tNo).append("]=0").append(ls); // Max matning
+        sb.append("$TC_TPC4[").append(tNo).append("]=0").append(ls); // Max varvtal
+        sb.append("$TC_TPC5[").append(tNo).append("]=0").append(ls); // Attr A
+        sb.append("$TC_TPC6[").append(tNo).append("]=0").append(ls); // Attr B
+        sb.append("$TC_TPC7[").append(tNo).append("]=0").append(ls); // Attr C
+        sb.append("$TC_TPC8[").append(tNo).append("]=0").append(ls); 
+        sb.append("$TC_TPC9[").append(tNo).append("]=3").append(ls); // Attr D. Ingen övervakning eller räkning
+        sb.append("$TC_TPC10[").append(tNo).append("]=0").append(ls);
+        
+        sb.append("$TC_DP1[").append(tNo).append(",").append(dNo)
+                .append("]=").append(toolType).append(ls); // Tool type
+        sb.append("$TC_DP2[").append(tNo).append(",").append(dNo)
+                .append("]=").append(slValue).append(ls); // cut location
+        sb.append("$TC_DP3[").append(tNo).append(",").append(dNo)
+                .append("]=").append(l1Value).append(ls); // Length 1
+        sb.append("$TC_DP4[").append(tNo).append(",").append(dNo)
+                .append("]=").append(l2Value).append(ls); // Length 2
+        sb.append("$TC_DP5[").append(tNo).append(",").append(dNo)
+                .append("]=").append(l3Value).append(ls); // Length 3
+        sb.append("$TC_DP6[").append(tNo).append(",").append(dNo)
+                .append("]=").append(rValue).append(ls); // Radius
+        
+        sb.append("$TC_DP8[").append(tNo).append(",").append(dNo)
+                .append("]=").append("0").append(ls); // Not used
+        sb.append("$TC_DP9[").append(tNo).append(",").append(dNo)
+                .append("]=").append("0").append(ls); // Not used
+        sb.append("$TC_DP10[").append(tNo).append(",").append(dNo)
+                .append("]=").append("0").append(ls); // Not used
+        sb.append("$TC_DP11[").append(tNo).append(",").append(dNo)
+                .append("]=").append("0").append(ls); // Not used
+        
+        sb.append("$TC_DP12[").append(tNo).append(",").append(dNo)
+                .append("]=").append(l1Ofs).append(ls); // Wear L1
+        sb.append("$TC_DP13[").append(tNo).append(",").append(dNo)
+                .append("]=").append(l2Ofs).append(ls); // Wear L1
+        sb.append("$TC_DP14[").append(tNo).append(",").append(dNo)
+                .append("]=").append(l3Ofs).append(ls); // Wear L1
+        sb.append("$TC_DP15[").append(tNo).append(",").append(dNo)
+                .append("]=").append(rOfs).append(ls); // Wear L1
+        
+        sb.append("$TC_DP16[").append(tNo).append(",").append(dNo)
+                .append("]=").append("0").append(ls); // Not used
+        sb.append("$TC_DP17[").append(tNo).append(",").append(dNo)
+                .append("]=").append("0").append(ls); // Not used
+        sb.append("$TC_DP18[").append(tNo).append(",").append(dNo)
+                .append("]=").append("0").append(ls); // Not used
+        sb.append("$TC_DP19[").append(tNo).append(",").append(dNo)
+                .append("]=").append("0").append(ls); // Not used
+        sb.append("$TC_DP20[").append(tNo).append(",").append(dNo)
+                .append("]=").append("0").append(ls); // Not used
+        sb.append("$TC_DP21[").append(tNo).append(",").append(dNo)
+                .append("]=").append("0").append(ls); // Not used
+        sb.append("$TC_DP22[").append(tNo).append(",").append(dNo)
+                .append("]=").append("0").append(ls); // Not used
+        sb.append("$TC_DP23[").append(tNo).append(",").append(dNo)
+                .append("]=").append("0").append(ls); // Not used
+        sb.append("$TC_DP24[").append(tNo).append(",").append(dNo)
+                .append("]=").append("0").append(ls); // Not used
+        sb.append("$TC_DP25[").append(tNo).append(",").append(dNo)
+                .append("]=").append("0").append(ls); // Not used
+        
+        sb.append("$TC_DPC1[").append(tNo).append(",").append(dNo)
+                .append("]=").append("0").append(ls); // Not used
+        sb.append("$TC_DPC2[").append(tNo).append(",").append(dNo)
+                .append("]=").append("0").append(ls); // Not used
+        sb.append("$TC_DPC3[").append(tNo).append(",").append(dNo)
+                .append("]=").append("0").append(ls); // Not used
+        
+        sb.append("$TC_DPC4[").append(tNo).append(",").append(dNo)
+                .append("]=").append(l1Value).append(ls); // Base length
+        sb.append("$TC_DPC5[").append(tNo).append(",").append(dNo)
+                .append("]=").append(tolerance).append(ls); // Length tolerance
+        sb.append("$TC_DPC6[").append(tNo).append(",").append(dNo)
+                .append("]=").append(rValue).append(ls); // Base radius
+        sb.append("$TC_DPC7[").append(tNo).append(",").append(dNo)
+                .append("]=").append(tolerance).append(ls); // Length tolerance
+        
+        sb.append("$TC_DPC8[").append(tNo).append(",").append(dNo)
+                .append("]=").append("0").append(ls); // Not used
+        sb.append("$TC_DPC9[").append(tNo).append(",").append(dNo)
+                .append("]=").append("0").append(ls); // Not used
+        sb.append("$TC_DPC10[").append(tNo).append(",").append(dNo)
+                .append("]=").append("0").append(ls); // Not used
+        
+        return sb.toString();
+
     }
     
     

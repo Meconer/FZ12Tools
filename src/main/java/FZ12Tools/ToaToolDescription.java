@@ -54,6 +54,18 @@ class ToaToolDescription {
         return null;
     }
 
+    public static ToaToolDescription buildFromToolTable(ToolCollection usedTools) {
+        if ( usedTools.collection.isEmpty() ) return null;
+        ToaToolDescription toaToolDescription = new ToaToolDescription();
+        StringBuilder sb = new StringBuilder();
+        usedTools.collection.forEach((tool) -> {
+            sb.append(tool.getToaLines());
+        });
+        toaToolDescription.toaText = sb.toString();
+        toaToolDescription.currentFilePath = null;
+        return toaToolDescription;
+    }
+
     ToolCollection buildToolTreeFromTOA() {
         ToolCollection usedTools = new ToolCollection();
         if ( toaText != null && !toaText.isEmpty()) {
@@ -78,5 +90,4 @@ class ToaToolDescription {
         
         return usedTools;
     }
-
 }
