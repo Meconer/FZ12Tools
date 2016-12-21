@@ -8,6 +8,7 @@ package FZ12Tools;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import javafx.scene.control.Alert;
 
 /**
  *
@@ -40,5 +41,13 @@ class Utilities {
             return new File( System.getProperty("user.home") + "\\Documents");
         }
     }
+    
+    public static void showAlert(String alertText) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Fel!");
+        alert.setContentText(alertText);
+        alert.showAndWait();
+    }
+
     
 }

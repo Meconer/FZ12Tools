@@ -53,6 +53,13 @@ public class FXMLController implements Initializable {
     }
 
     @FXML
+    private void onSaveToa() {
+        if (toaToolDescription != null) {
+            toaToolDescription.saveToFile();
+        }
+    }
+
+    @FXML
     private void onOpenMpf() {
         fZ12Program = FZ12Program.loadFromFile();
         if (fZ12Program != null) {

@@ -19,6 +19,7 @@
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#onOpenMpf" text="Öppna cncprogram" />
                         <MenuItem mnemonicParsing="false" onAction="#onOpenToa" text="Öppna TOA-fil" />
+                        <MenuItem mnemonicParsing="false" onAction="#onSaveToa" text="Spara TOA-fil" />
                         <MenuItem mnemonicParsing="false" onAction="#onOpenZollerFile" text="Öppna zoller-fil" />
                         <MenuItem mnemonicParsing="false" onAction="#onClose" text="Avsluta" />
                     </items>
