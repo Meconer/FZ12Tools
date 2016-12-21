@@ -27,3 +27,11 @@ dependencies {
     //   http://www.gradle.org/docs/current/userguide/dependency_management.html#sec:how_to_declare_your_dependencies
     testCompile group: 'junit', name: 'junit', version: '4.10'
 }
+
+jar {
+    manifest {
+        attributes("Implementation-Title": "Gradle",
+                   "Implementation-Version": "1.0",
+                   "Main-Class": "FZ12Tools.MainApp")
+    }
+}
