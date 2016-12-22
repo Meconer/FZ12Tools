@@ -97,9 +97,19 @@ public class FXMLController implements Initializable {
     private void onFillInFromZoller() {
         if (zollerValues != null) {
             if (usedTools != null) {
-                zollerValues.fillInToolCollection(usedTools);
+                zollerValues.fillInToolCollectionFromZoller(usedTools);
             }
             tableView.refresh();
+        }
+    }
+
+    @FXML
+    private void onFillInFromToa() {
+        if ( toaToolDescription != null ) {
+            if ( usedTools != null ) {
+                toaToolDescription.fillInToolCollectionFromToa( usedTools );
+                tableView.refresh();
+            }
         }
     }
     

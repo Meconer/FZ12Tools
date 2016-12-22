@@ -28,7 +28,7 @@ public class FZ12Program {
     public static FZ12Program loadFromFile() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Öppna FZ12program");
-        fileChooser.setInitialDirectory(Utilities.getHomeDirectory());
+        fileChooser.setInitialDirectory(Utilities.getNcdokDirectory());
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("MPF", "*.mpf"),
                 new FileChooser.ExtensionFilter("Alla filer", "*.*")

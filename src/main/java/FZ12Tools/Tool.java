@@ -432,6 +432,22 @@ public class Tool {
         return sb.toString();
 
     }
+
+    void copyValuesFromTool(Tool toaTool) {
+        tNo = toaTool.tNo;
+        dNo = toaTool.dNo;
+        toolType = toaTool.toolType;
+        slValue = toaTool.slValue;
+        l1Value = toaTool.l1Value;
+        l2Value = toaTool.l2Value;
+        l3Value = toaTool.l3Value;
+        rValue = toaTool.rValue;
+        l1Ofs = toaTool.l1Ofs;
+        l2Ofs = toaTool.l2Ofs;
+        l3Ofs = toaTool.l3Ofs;
+        rOfs = toaTool.rOfs;
+        
+    }
     
     
 }

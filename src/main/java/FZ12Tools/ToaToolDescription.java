@@ -34,7 +34,7 @@ class ToaToolDescription {
     public static ToaToolDescription loadFromFile() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Öppna TOA-fil");
-        fileChooser.setInitialDirectory(Utilities.getHomeDirectory());
+        fileChooser.setInitialDirectory(Utilities.getNcdokDirectory());
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("TOA", "*.toa"),
                 new FileChooser.ExtensionFilter("Alla filer", "*.*")
@@ -70,9 +70,9 @@ class ToaToolDescription {
 
     ToolCollection buildToolTreeFromTOA() {
         ToolCollection usedTools = new ToolCollection();
-        String ls = System.lineSeparator();
         if (toaText != null && !toaText.isEmpty()) {
-            for (String toaLine : toaText.split(ls)) {
+            for (String toaLine : toaText.split("\n")) {
+                toaLine = toaLine.replace("\r", "");
                 toaLine = Utilities.removeComment(toaLine);
                 int tNo = Tool.getTNoFromToaLine(toaLine);
                 int dNo = Tool.getDNoFromToaLine(toaLine);
@@ -95,7 +95,7 @@ class ToaToolDescription {
     void saveToFile() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Spara TOA-fil");
-        fileChooser.setInitialDirectory(Utilities.getHomeDirectory());
+        fileChooser.setInitialDirectory(Utilities.getNcdokDirectory());
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("TOA", "*.toa"),
                 new FileChooser.ExtensionFilter("Alla filer", "*.*")
@@ -112,6 +112,14 @@ class ToaToolDescription {
             } catch (IOException ex) {
                 Utilities.showAlert("Kan inte spara TOA-filen");
             }
+        }
+    }
+
+    void fillInToolCollectionFromToa(ToolCollection usedTools) {
+        ToolCollection toaTools = buildToolTreeFromTOA();
+        for ( Tool tool : usedTools.collection ) {
+            Tool toaTool = toaTools.getTool(tool.getTNo(), tool.getDNo());
+            if ( toaTool != null ) tool.copyValuesFromTool( toaTool );
         }
     }
 }

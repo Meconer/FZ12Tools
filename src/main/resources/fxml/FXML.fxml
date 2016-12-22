@@ -32,6 +32,7 @@
                         <MenuItem mnemonicParsing="false" onAction="#onBuildToolTree" text="Skapa verktygstabell från MPF" />
                         <MenuItem mnemonicParsing="false" onAction="#onLoadToolsFromToa" text="Skapa verktygstabell från TOA" />
                         <MenuItem mnemonicParsing="false" onAction="#onFillInFromZoller" text="Fyll i värden från zoller-fil" />
+                        <MenuItem mnemonicParsing="false" onAction="#onFillInFromToa" text="Fyll i värden från TOA-fil" />
                         <MenuItem mnemonicParsing="false" onAction="#onBuildToaFromTable" text="Skapa TOA-fil från verktygstabell" />
                     </items>
                 </Menu>

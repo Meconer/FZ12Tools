@@ -16,9 +16,9 @@ import javafx.scene.control.Alert;
  */
 class Utilities {
 
-    private static final boolean DEBUG = true;
+    private static final boolean DEBUG = false;
     
-    static File getHomeDirectory() {
+    static File getNcdokDirectory() {
         if ( DEBUG ) return new File( System.getProperty("user.home") + "\\Documents");
         String meconaHomeDir = "J:\\NCDOK\\";
         if ( Files.exists( Paths.get( meconaHomeDir ))) {
