@@ -25,6 +25,11 @@ public class FZ12Program {
     String entireProgram = null;
     private Path currentFilePath;
 
+    public Path getCurrentFilePath() {
+        return currentFilePath;
+    }
+
+    
     public static FZ12Program loadFromFile() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Öppna FZ12program");

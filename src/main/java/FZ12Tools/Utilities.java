@@ -7,6 +7,7 @@ package FZ12Tools;
 
 import java.io.File;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import javafx.scene.control.Alert;
 
@@ -16,7 +17,7 @@ import javafx.scene.control.Alert;
  */
 class Utilities {
 
-    private static final boolean DEBUG = false;
+    private static final boolean DEBUG = true;
     
     static File getNcdokDirectory() {
         if ( DEBUG ) return new File( System.getProperty("user.home") + "\\Documents");
@@ -47,6 +48,17 @@ class Utilities {
         alert.setTitle("Fel!");
         alert.setContentText(alertText);
         alert.showAndWait();
+    }
+
+    static Path getTemplatePath() {
+        if ( DEBUG ) return Paths.get( "E:\\Dropbox\\Mecona\\VLISTFZ12.ODS");
+        String templateHomeDir = "J:\\NCPROG\\FZ12\\VLIST";
+        if ( Files.exists( Paths.get( templateHomeDir ))) {
+            return Paths.get( templateHomeDir );
+        } else {
+            Utilities.showAlert("Ingen templatefil");
+            return null;
+        }
     }
 
     

@@ -25,8 +25,9 @@ public class FXMLController implements Initializable {
 
     FZ12Program fZ12Program = null;
     ToaToolDescription toaToolDescription = null;
-    ToolCollection usedTools;
+    ToolCollection usedTools = null;
     ZollerValues zollerValues = null;
+    
     boolean tableViewHasValues = false;
 
     @FXML
@@ -121,6 +122,13 @@ public class FXMLController implements Initializable {
         }
     }
 
+    @FXML
+    private void onBuildOdsToolList() {
+        if ( fZ12Program != null && usedTools != null) {
+            OdsList.BuildFromProgramAndToolTable(fZ12Program, usedTools);
+        }
+    }
+    
     @FXML
     private void onClose() {
         System.exit(0);
