@@ -18,7 +18,7 @@
     <top>
         <MenuBar BorderPane.alignment="CENTER">
             <menus>
-                <Menu mnemonicParsing="false" text="File">
+                <Menu mnemonicParsing="false" text="Arkiv">
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#onOpenMpf" text="Öppna cncprogram" />
                         <MenuItem mnemonicParsing="false" onAction="#onOpenToa" text="Öppna TOA-fil" />
@@ -27,16 +27,17 @@
                         <MenuItem mnemonicParsing="false" onAction="#onClose" text="Avsluta" />
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
+                <Menu mnemonicParsing="false" text="Verktyg">
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#onBuildToolTree" text="Skapa verktygstabell från MPF" />
                         <MenuItem mnemonicParsing="false" onAction="#onLoadToolsFromToa" text="Skapa verktygstabell från TOA" />
                         <MenuItem mnemonicParsing="false" onAction="#onFillInFromZoller" text="Fyll i värden från zoller-fil" />
                         <MenuItem mnemonicParsing="false" onAction="#onFillInFromToa" text="Fyll i värden från TOA-fil" />
                         <MenuItem mnemonicParsing="false" onAction="#onBuildToaFromTable" text="Skapa TOA-fil från verktygstabell" />
+                        <MenuItem mnemonicParsing="false" onAction="#onBuildOdsToolList" text="Skapa ODS-verktygslista från MPF och verktygstabell" />
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Help">
+                <Menu mnemonicParsing="false" text="Hjälp">
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#onAbout" text="Om" />
                     </items>
