@@ -73,9 +73,9 @@ class OdsList {
             sheet.getCellAt(5, 4).setValue(name);
             sheet.getCellAt(5, 5).setValue(artNo);
 
-            int startOdsLine = 15;
+            int startOdsLine = 13;
             for (Tool tool : usedTools.collection) {
-                int currentLine = startOdsLine + tool.getTNo() + tool.getDNo() - 1;
+                int currentLine = startOdsLine + 2 * tool.getTNo() + tool.getDNo() - 1;
                 sheet.getCellAt(0, currentLine).setValue(tool.getTNo());
                 sheet.getCellAt(1, currentLine).setValue(tool.getDNo());
                 sheet.getCellAt(2, currentLine).setValue(tool.getToolType());
