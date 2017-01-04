@@ -130,6 +130,11 @@ public class FXMLController implements Initializable {
     }
     
     @FXML
+    private void onOpenSettings() {
+        
+    }
+    
+    @FXML
     private void onClose() {
         System.exit(0);
     }

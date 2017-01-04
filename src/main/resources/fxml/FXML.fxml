@@ -22,8 +22,10 @@
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#onOpenMpf" text="Öppna cncprogram" />
                         <MenuItem mnemonicParsing="false" onAction="#onOpenToa" text="Öppna TOA-fil" />
-                        <MenuItem mnemonicParsing="false" onAction="#onSaveToa" text="Spara TOA-fil" />
                         <MenuItem mnemonicParsing="false" onAction="#onOpenZollerFile" text="Öppna zoller-fil" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" onAction="#onSaveToa" text="Spara TOA-fil" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" onAction="#onClose" text="Avsluta" />
                     </items>
                 </Menu>
@@ -31,10 +33,14 @@
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#onBuildToolTree" text="Skapa verktygstabell från MPF" />
                         <MenuItem mnemonicParsing="false" onAction="#onLoadToolsFromToa" text="Skapa verktygstabell från TOA" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" onAction="#onFillInFromZoller" text="Fyll i värden från zoller-fil" />
                         <MenuItem mnemonicParsing="false" onAction="#onFillInFromToa" text="Fyll i värden från TOA-fil" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" onAction="#onBuildToaFromTable" text="Skapa TOA-fil från verktygstabell" />
                         <MenuItem mnemonicParsing="false" onAction="#onBuildOdsToolList" text="Skapa ODS-verktygslista från MPF och verktygstabell" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" onAction="#onOpenSettings" text="Inställningar" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Hjälp">
