@@ -341,7 +341,7 @@ public class Tool {
     public String getToaLines() {
         StringBuilder sb = new StringBuilder();
         String ls = System.lineSeparator();
-        String tolerance = "5.0";
+        String tolerance = "1.0";
         
         sb.append("$TC_TPC1[").append(tNo).append("]=").append(tNo).append(ls); // Id 1
         sb.append("$TC_TPC2[").append(tNo).append("]=").append(tNo).append(ls); // Id 2
@@ -350,8 +350,8 @@ public class Tool {
         sb.append("$TC_TPC5[").append(tNo).append("]=0").append(ls); // Attr A
         sb.append("$TC_TPC6[").append(tNo).append("]=0").append(ls); // Attr B
         sb.append("$TC_TPC7[").append(tNo).append("]=0").append(ls); // Attr C
-        sb.append("$TC_TPC8[").append(tNo).append("]=0").append(ls); 
-        sb.append("$TC_TPC9[").append(tNo).append("]=3").append(ls); // Attr D. Ingen övervakning eller räkning
+        sb.append("$TC_TPC8[").append(tNo).append("]=3").append(ls); // Attr D. Ingen övervakning eller räkning
+        sb.append("$TC_TPC9[").append(tNo).append("]=0").append(ls); 
         sb.append("$TC_TPC10[").append(tNo).append("]=0").append(ls);
         
         sb.append("$TC_DP1[").append(tNo).append(",").append(dNo)
@@ -416,14 +416,14 @@ public class Tool {
         sb.append("$TC_DPC4[").append(tNo).append(",").append(dNo)
                 .append("]=").append(l1Value).append(ls); // Base length
         sb.append("$TC_DPC5[").append(tNo).append(",").append(dNo)
-                .append("]=").append(tolerance).append(ls); // Length tolerance
-        sb.append("$TC_DPC6[").append(tNo).append(",").append(dNo)
                 .append("]=").append(rValue).append(ls); // Base radius
+        sb.append("$TC_DPC6[").append(tNo).append(",").append(dNo)
+                .append("]=").append("0").append(ls); // Not used
         sb.append("$TC_DPC7[").append(tNo).append(",").append(dNo)
                 .append("]=").append(tolerance).append(ls); // Length tolerance
-        
         sb.append("$TC_DPC8[").append(tNo).append(",").append(dNo)
-                .append("]=").append("0").append(ls); // Not used
+                .append("]=").append(tolerance).append(ls); // Radius tolerance
+        
         sb.append("$TC_DPC9[").append(tNo).append(",").append(dNo)
                 .append("]=").append("0").append(ls); // Not used
         sb.append("$TC_DPC10[").append(tNo).append(",").append(dNo)
