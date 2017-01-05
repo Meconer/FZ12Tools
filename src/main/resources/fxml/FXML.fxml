@@ -14,7 +14,7 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="658.0" prefWidth="1044.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FZ12Tools.FXMLController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="658.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FZ12Tools.FXMLController">
     <top>
         <MenuBar BorderPane.alignment="CENTER">
             <menus>
@@ -73,20 +73,21 @@
                         </Tab>
                     </tabs>
                 </TabPane>
-                <TableView fx:id="tableView" prefHeight="633.0" prefWidth="653.0">
+                <TableView fx:id="tableView" prefHeight="633.0" prefWidth="800.0">
                     <columns>
                         <TableColumn fx:id="tNoCol" prefWidth="40.0" text="T nr" />
                         <TableColumn fx:id="dNoCol" prefWidth="40.0" text="D nr" />
+                        <TableColumn fx:id="toolNameCol" prefWidth="100.0" text="Namn" />
                         <TableColumn fx:id="typeCol" prefWidth="50.0" text="Typ" />
                         <TableColumn fx:id="slValueCol" prefWidth="40.0" text="SL" />
-                        <TableColumn fx:id="l1ValueCol" prefWidth="65.0" text="Längd 1" />
-                        <TableColumn fx:id="l2ValueCol" prefWidth="65.0" text="Längd 2" />
-                        <TableColumn fx:id="l3ValueCol" prefWidth="65.0" text="Längd 3" />
-                        <TableColumn fx:id="rValueCol" prefWidth="65.0" text="Radie" />
-                        <TableColumn fx:id="l1OfsCol" prefWidth="65.0" text="Försl L1" />
-                        <TableColumn fx:id="l2OfsCol" prefWidth="65.0" text="Försl L2" />
-                        <TableColumn fx:id="l3OfsCol" prefWidth="65.0" text="Försl L3" />
-                        <TableColumn fx:id="rOfsCol" prefWidth="65.0" text="Försl R" />
+                        <TableColumn fx:id="l1ValueCol" prefWidth="60.0" text="Längd 1" />
+                        <TableColumn fx:id="l2ValueCol" prefWidth="60.0" text="Längd 2" />
+                        <TableColumn fx:id="l3ValueCol" prefWidth="60.0" text="Längd 3" />
+                        <TableColumn fx:id="rValueCol" prefWidth="60.0" text="Radie" />
+                        <TableColumn fx:id="l1OfsCol" prefWidth="60.0" text="Försl L1" />
+                        <TableColumn fx:id="l2OfsCol" prefWidth="60.0" text="Försl L2" />
+                        <TableColumn fx:id="l3OfsCol" prefWidth="60.0" text="Försl L3" />
+                        <TableColumn fx:id="rOfsCol" prefWidth="60.0" text="Försl R" />
                     </columns>
                 </TableView>
          </items>

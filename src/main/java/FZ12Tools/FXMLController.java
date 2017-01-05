@@ -35,7 +35,7 @@ public class FXMLController implements Initializable {
     @FXML
     private TableView<Tool> tableView;
     @FXML
-    private TableColumn tNoCol, dNoCol, typeCol, slValueCol, l1ValueCol,
+    private TableColumn tNoCol, dNoCol, toolNameCol, typeCol, slValueCol, l1ValueCol,
             l2ValueCol, l3ValueCol, rValueCol;
     @FXML
     private TableColumn l1OfsCol, l2OfsCol, l3OfsCol, rOfsCol;
@@ -158,6 +158,7 @@ public class FXMLController implements Initializable {
     private void initTableView() {
         tNoCol.setCellValueFactory(new PropertyValueFactory<>("tNo"));
         dNoCol.setCellValueFactory(new PropertyValueFactory<>("dNo"));
+        toolNameCol.setCellValueFactory(new PropertyValueFactory<>("toolName"));
         typeCol.setCellValueFactory(new PropertyValueFactory<>("toolType"));
         slValueCol.setCellValueFactory(new PropertyValueFactory<>("slValue"));
         l1ValueCol.setCellValueFactory(new PropertyValueFactory<>("l1Value"));

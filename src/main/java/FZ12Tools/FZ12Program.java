@@ -73,6 +73,24 @@ public class FZ12Program {
         // Check each line
         for (String line : entireProgram.split(ls)) {
 
+            // Check if this line is a tool name comment. Add the tool name to 
+            Matcher m = toolNamePattern.matcher(line);
+            if ( m.matches()) {
+                String tNoString = m.group(1);
+                String dNoString = m.group(2);
+                String toolName = m.group(3);
+                int toolNo = Integer.parseInt(tNoString);
+                int dNo = Integer.parseInt(dNoString);
+                Tool tool;
+                if ( usedTools.toolExist(toolNo, dNo)) {
+                    tool = usedTools.getTool(toolNo, dNo);
+                } else {
+                    usedTools.addTool(toolNo, dNo);
+                    tool = usedTools.getTool(toolNo, dNo);
+                }
+                tool.setToolName(toolName);
+            }
+
             // Now remove all comments
             line = Utilities.removeComment(line);
             // and also remove everything in parenthesis
@@ -81,7 +99,7 @@ public class FZ12Program {
             line = line.toUpperCase();
 
             // Check if the line turns on or off turning mode
-            Matcher m = turnOnPattern.matcher(line);
+            m = turnOnPattern.matcher(line);
             if (m.matches()) {
                 isTurning = true;
             }
@@ -120,7 +138,6 @@ public class FZ12Program {
                 }
             }
             
-            // Check if this line is a tool name comment. Add the tool name to 
         }
 
         // If the same tool place has more than one d number then we should calculate a
