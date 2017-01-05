@@ -61,7 +61,7 @@ class ToaToolDescription {
         ToaToolDescription toaToolDescription = new ToaToolDescription();
         StringBuilder sb = new StringBuilder();
         usedTools.collection.forEach((tool) -> {
-            sb.append(tool.getToaLines());
+            sb.append(tool.createToaLines());
         });
         toaToolDescription.toaText = sb.toString();
         toaToolDescription.currentFilePath = null;

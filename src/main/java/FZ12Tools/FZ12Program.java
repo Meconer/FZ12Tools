@@ -59,10 +59,12 @@ public class FZ12Program {
         String dNoRegexp = ".*(D\\d+).*";
         String turnOnRegexp = ".*_TURN[V|H]";
         String turnOffRegexp = ".*_TURN_OFF";
+        String toolNameRegexp = "^;\\*\\*\\* T(\\d+) D(\\d+) (.+)$";
         Pattern toolPattern = Pattern.compile(toolRegexp);
         Pattern dNoPattern = Pattern.compile(dNoRegexp);
         Pattern turnOnPattern = Pattern.compile(turnOnRegexp);
         Pattern turnOffPattern = Pattern.compile(turnOffRegexp);
+        Pattern toolNamePattern = Pattern.compile(toolNameRegexp);
 
         int currentToolNo = 0;
         boolean isTurning = false;
@@ -117,6 +119,8 @@ public class FZ12Program {
                     tool.setSlValue(3);
                 }
             }
+            
+            // Check if this line is a tool name comment. Add the tool name to 
         }
 
         // If the same tool place has more than one d number then we should calculate a

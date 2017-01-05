@@ -19,6 +19,7 @@ public class Tool {
 
     private  int tNo;          // Tool number. 1 to MAX_TOOL_NUMBER
     private  int dNo;          // Offset number.
+    private String toolName;   // Name of tool in program
     private  String l1Value;   // Geometry values for the tool.
     private  String l2Value;
     private  String l3Value;
@@ -58,6 +59,7 @@ public class Tool {
     public Tool() {
         this.tNo = -1;
         this.dNo = -1;
+        this.toolName = "";
         this.toolType = 120;
         this.slValue = 3;
         this.l1Value = "0";
@@ -101,6 +103,14 @@ public class Tool {
 
     public void setToolType(int toolType) {
         this.toolType = toolType;
+    }
+
+    public String getToolName() {
+        return toolName;
+    }
+
+    public void setToolName(String toolName) {
+        this.toolName = toolName;
     }
 
     public int getDNo() {
@@ -338,7 +348,7 @@ public class Tool {
         this.rValue = zollerTool.rValue;
     }
 
-    public String getToaLines() {
+    public String createToaLines() {
         StringBuilder sb = new StringBuilder();
         String ls = System.lineSeparator();
         String tolerance = "1.0";
@@ -436,6 +446,7 @@ public class Tool {
     void copyValuesFromTool(Tool toaTool) {
         tNo = toaTool.tNo;
         dNo = toaTool.dNo;
+        if ( !toaTool.toolName.isEmpty()) toolName = toaTool.toolName;
         toolType = toaTool.toolType;
         slValue = toaTool.slValue;
         l1Value = toaTool.l1Value;
