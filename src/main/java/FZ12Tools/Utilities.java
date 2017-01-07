@@ -20,8 +20,7 @@ class Utilities {
     private static final boolean DEBUG = true;
     
     static File getNcdokDirectory() {
-        if ( DEBUG ) return new File( System.getProperty("user.home") + "\\Documents");
-        String meconaHomeDir = "J:\\NCDOK\\";
+        String meconaHomeDir = FZ12Preferences.getInstance().getDefaultDirectory();
         if ( Files.exists( Paths.get( meconaHomeDir ))) {
             return new File( meconaHomeDir );
         } else {
@@ -34,10 +33,9 @@ class Utilities {
     }
 
     static File getZollerFileDirectory() {
-        if ( DEBUG ) return new File( System.getProperty("user.home") + "\\Documents");
-        String meconaHomeDir = "J:\\verktyg\\";
-        if ( Files.exists( Paths.get( meconaHomeDir ))) {
-            return new File( meconaHomeDir );
+        String toolDir = FZ12Preferences.getInstance().getToolDirectory();
+        if ( Files.exists( Paths.get( toolDir ))) {
+            return new File( toolDir );
         } else {
             return new File( System.getProperty("user.home") + "\\Documents");
         }

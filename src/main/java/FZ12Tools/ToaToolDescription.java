@@ -44,6 +44,7 @@ class ToaToolDescription {
         if (toaFile != null) {
             ToaToolDescription toaToolDescription = new ToaToolDescription();
             toaToolDescription.currentFilePath = Paths.get(toaFile.getAbsolutePath());
+            FZ12Preferences.getInstance().setDefaultDirectory(toaToolDescription.currentFilePath.getParent().toString());
             try {
                 toaToolDescription.toaText = new String(Files.readAllBytes(toaToolDescription.currentFilePath));
                 return toaToolDescription;

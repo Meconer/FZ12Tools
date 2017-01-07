@@ -43,6 +43,7 @@ public class FZ12Program {
         if (fz12ProgramFile != null) {
             FZ12Program fZ12Program = new FZ12Program();
             fZ12Program.currentFilePath = Paths.get(fz12ProgramFile.getAbsolutePath());
+            FZ12Preferences.getInstance().setDefaultDirectory(fZ12Program.currentFilePath.getParent().toString());
             try {
                 fZ12Program.entireProgram = new String(Files.readAllBytes(fZ12Program.currentFilePath));
                 return fZ12Program;

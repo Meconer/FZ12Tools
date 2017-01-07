@@ -31,6 +31,7 @@ class ZollerValues {
         if (zollerToolFile != null) {
             ZollerValues zollerValues = new ZollerValues();
             zollerValues.currentFilePath = Paths.get(zollerToolFile.getAbsolutePath());
+            FZ12Preferences.getInstance().setToolDirectory(zollerValues.currentFilePath.getParent().toString());
             try {
                 zollerValues.text = new String(Files.readAllBytes(zollerValues.currentFilePath));
                 return zollerValues;
