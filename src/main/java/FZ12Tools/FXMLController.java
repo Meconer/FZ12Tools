@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
@@ -43,6 +44,8 @@ public class FXMLController implements Initializable {
     private TabPane tabPane;
     @FXML
     private Tab mpfTab, toaTab, zollerTab;
+    @FXML
+    private Button eraseTableRowButton;
 
     @FXML
     private void onOpenToa() {
@@ -130,20 +133,23 @@ public class FXMLController implements Initializable {
     }
     
     @FXML
-    private void onOpenSettings() {
-        
-    }
-    
-    @FXML
     private void onClose() {
         System.exit(0);
     }
 
     @FXML
     private void onAbout() {
-
+        Utilities.showAboutBox();
     }
 
+    @FXML
+    private void onEraseTableRow() {
+        if ( tableViewHasValues ) {
+            Tool tool = tableView.getSelectionModel().getSelectedItem();
+            usedTools.removeTool( tool );
+        }
+    }
+    
     /**
      * Initializes the controller class.
      *
@@ -152,7 +158,7 @@ public class FXMLController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // Todo
+        eraseTableRowButton.setDisable(true);
     }
 
     private void initTableView() {
@@ -173,6 +179,10 @@ public class FXMLController implements Initializable {
             tableView.setItems(usedTools.collection);
             tableViewHasValues = true;
         }
+        tableView.setEditable(true);
+        tableView.getSelectionModel().selectedItemProperty().addListener((obsList, oldSelection, newSelection) -> {
+            eraseTableRowButton.setDisable(newSelection == null );
+        });
     }
 
 }

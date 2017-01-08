@@ -87,4 +87,8 @@ class ToolCollection {
 
     }
 
+    void removeTool(Tool tool) {
+        collection.remove(tool);
+    }
+
 }

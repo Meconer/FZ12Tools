@@ -59,5 +59,12 @@ class Utilities {
         }
     }
 
+    static void showAboutBox() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Om");
+        alert.setContentText("Om FZ12Tools\nVersion 0.1 2017-01-08");
+        alert.showAndWait();
+    }
+
     
 }

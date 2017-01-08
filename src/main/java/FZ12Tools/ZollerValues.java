@@ -49,7 +49,6 @@ class ZollerValues {
             if ( tool != null ) {
                 tool.copyFromZollerValues( zollerTool );
             }
-            
         }
     }
 

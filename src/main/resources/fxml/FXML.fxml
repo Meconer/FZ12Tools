@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -23,9 +24,9 @@
                         <MenuItem mnemonicParsing="false" onAction="#onOpenMpf" text="Öppna cncprogram" />
                         <MenuItem mnemonicParsing="false" onAction="#onOpenToa" text="Öppna TOA-fil" />
                         <MenuItem mnemonicParsing="false" onAction="#onOpenZollerFile" text="Öppna zoller-fil" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" onAction="#onSaveToa" text="Spara TOA-fil" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" onAction="#onClose" text="Avsluta" />
                     </items>
                 </Menu>
@@ -33,14 +34,12 @@
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#onBuildToolTree" text="Skapa verktygstabell från MPF" />
                         <MenuItem mnemonicParsing="false" onAction="#onLoadToolsFromToa" text="Skapa verktygstabell från TOA" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" onAction="#onFillInFromZoller" text="Fyll i värden från zoller-fil" />
                         <MenuItem mnemonicParsing="false" onAction="#onFillInFromToa" text="Fyll i värden från TOA-fil" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" onAction="#onBuildToaFromTable" text="Skapa TOA-fil från verktygstabell" />
                         <MenuItem mnemonicParsing="false" onAction="#onBuildOdsToolList" text="Skapa ODS-verktygslista från MPF och verktygstabell" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" onAction="#onOpenSettings" text="Inställningar" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Hjälp">
@@ -52,8 +51,8 @@
         </MenuBar>
     </top>
     <center>
-      <SplitPane dividerPositions="0.3">
-         <items>
+        <SplitPane dividerPositions="0.3">
+            <items>
                 <TabPane fx:id="tabPane" prefWidth="321.0">
                     <tabs>
                         <Tab fx:id="mpfTab" closable="false" text="MPF">
@@ -90,7 +89,20 @@
                         <TableColumn fx:id="rOfsCol" prefWidth="60.0" text="Försl R" />
                     </columns>
                 </TableView>
-         </items>
-      </SplitPane>
+            </items>
+        </SplitPane>
     </center>
+   <bottom>
+      <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="200.0" spacing="5.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="eraseTableRowButton" mnemonicParsing="false" onAction="#onEraseTableRow" text="Radera tabellrad" />
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets right="5.0" />
+         </padding>
+      </HBox>
+   </bottom>
 </BorderPane>
