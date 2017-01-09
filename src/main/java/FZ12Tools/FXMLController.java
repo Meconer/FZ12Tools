@@ -133,6 +133,11 @@ public class FXMLController implements Initializable {
     }
     
     @FXML
+    private void onOpenSettings() {
+        SettingsDialog.showTemplateFileSettingsDialog();
+    }
+    
+    @FXML
     private void onClose() {
         System.exit(0);
     }

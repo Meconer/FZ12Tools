@@ -40,6 +40,8 @@
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" onAction="#onBuildToaFromTable" text="Skapa TOA-fil från verktygstabell" />
                         <MenuItem mnemonicParsing="false" onAction="#onBuildOdsToolList" text="Skapa ODS-verktygslista från MPF och verktygstabell" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" onAction="#onOpenSettings" text="Inställningar" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Hjälp">

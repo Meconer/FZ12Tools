@@ -8,6 +8,7 @@ package FZ12Tools;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Date;
 import javafx.stage.FileChooser;
 import org.jopendocument.dom.OOUtils;
@@ -43,7 +44,7 @@ class OdsList {
 
     private static void saveOdsFile(File odsFile, ToolCollection usedTools) {
         try {
-            Path templatePath = Utilities.getTemplatePath();
+            Path templatePath = Paths.get(FZ12Preferences.getInstance().getDefaultTemplatePath());
             File odsTemplateFile = templatePath.toFile();
             Sheet sheet = SpreadSheet.createFromFile(odsTemplateFile).getFirstSheet();
 

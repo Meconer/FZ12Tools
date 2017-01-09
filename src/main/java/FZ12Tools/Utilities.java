@@ -48,17 +48,6 @@ class Utilities {
         alert.showAndWait();
     }
 
-    static Path getTemplatePath() {
-        if ( DEBUG ) return Paths.get( "E:\\Dropbox\\Mecona\\VLISTFZ12.ODS");
-        String templatePath = "J:\\NCPROG\\Chiron FZ12\\VLISTFZ12.ODS";
-        if ( Files.exists( Paths.get( templatePath ))) {
-            return Paths.get( templatePath );
-        } else {
-            Utilities.showAlert("Ingen templatefil");
-            return null;
-        }
-    }
-
     static void showAboutBox() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Om");

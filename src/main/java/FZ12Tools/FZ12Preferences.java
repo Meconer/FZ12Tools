@@ -13,7 +13,7 @@ import java.util.prefs.Preferences;
  */
 public class FZ12Preferences {
     private static FZ12Preferences instance = null;
-    private Preferences prefs = Preferences.userNodeForPackage(getClass());
+    private final Preferences prefs = Preferences.userNodeForPackage(getClass());
     
     private final String DEFAULT_TOOL_DIRECTORY = "J:\\verktyg";
     private final String TOOL_DIRECTORY_KEY = "ToolDirectory";
@@ -22,6 +22,10 @@ public class FZ12Preferences {
     private final String DEFAULT_DIRECTORY = "J:\\NCDOK";
     private final String DEFAULT_DIRECTORY_KEY = "DefaultDirectory";
     private String defaultDirectory;
+    
+    private final String DEFAULT_TEMPLATE_PATH = "J:\\NCPROG\\Chiron FZ12\\VLIST.ODS";
+    private final String DEFAULT_TEMPLATE_PATH_KEY = "DefaultTemplatePath";
+    private String defaultTemplatePath;
     
     protected FZ12Preferences() {
         initPrefs();
@@ -37,6 +41,7 @@ public class FZ12Preferences {
     private void initPrefs() {
         toolDirectory = prefs.get(TOOL_DIRECTORY_KEY, DEFAULT_TOOL_DIRECTORY);
         defaultDirectory = prefs.get(DEFAULT_DIRECTORY_KEY, DEFAULT_DIRECTORY);
+        defaultTemplatePath = prefs.get(DEFAULT_TEMPLATE_PATH_KEY, DEFAULT_TEMPLATE_PATH);
     }
 
     public String getToolDirectory() {
@@ -56,7 +61,15 @@ public class FZ12Preferences {
         this.defaultDirectory = defaultDirectory;
         prefs.put(DEFAULT_DIRECTORY_KEY, defaultDirectory);
     }
-    
-    
+
+    public String getDefaultTemplatePath() {
+        return defaultTemplatePath;
+    }
+
+    public void setDefaultTemplatePath(String defaultTemplatePath) {
+        this.defaultTemplatePath = defaultTemplatePath;
+        prefs.put(DEFAULT_TEMPLATE_PATH_KEY, defaultTemplatePath);
+    }
+
      
 }
