@@ -43,7 +43,9 @@ class OdsList {
 
     private static void saveOdsFile(File odsFile, ToolCollection usedTools) {
         try {
-            Sheet sheet = SpreadSheet.createFromFile(Utilities.getTemplatePath().toFile()).getFirstSheet();
+            Path templatePath = Utilities.getTemplatePath();
+            File odsTemplateFile = templatePath.toFile();
+            Sheet sheet = SpreadSheet.createFromFile(odsTemplateFile).getFirstSheet();
 
             // Lägg in datum högst upp till höger
             sheet.getCellAt(7, 0).setValue(new Date());
@@ -78,11 +80,16 @@ class OdsList {
                 int currentLine = startOdsLine + 2 * tool.getTNo() + tool.getDNo() - 1;
                 sheet.getCellAt(0, currentLine).setValue(tool.getTNo());
                 sheet.getCellAt(1, currentLine).setValue(tool.getDNo());
-                sheet.getCellAt(2, currentLine).setValue(tool.getToolType());
-                sheet.getCellAt(5, currentLine).setValue(tool.getL1Value());
-                sheet.getCellAt(7, currentLine).setValue(tool.getRValue());
+                sheet.getCellAt(2, currentLine).setValue(tool.getToolName());
+                sheet.getCellAt(5, currentLine).setValue(tool.getRValue());
+                sheet.getCellAt(2, currentLine+1).setValue(tool.getL1Value());
+                sheet.getCellAt(3, currentLine+1).setValue(tool.getToolType());
             }
-            sheet.getSpreadSheet().saveAs(odsFile);
+            String odsFileName = odsFile.getAbsolutePath();
+            int idxOfLastDot = odsFileName.lastIndexOf(".");
+            if ( idxOfLastDot >= 0 ) odsFileName = odsFileName.substring(0,idxOfLastDot);
+            File odsFileToSave  = new File(odsFileName);
+            sheet.getSpreadSheet().saveAs(odsFileToSave);
             OOUtils.open(odsFile);
 
         } catch (IOException ex) {

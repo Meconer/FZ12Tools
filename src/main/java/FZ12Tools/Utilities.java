@@ -17,7 +17,7 @@ import javafx.scene.control.Alert;
  */
 class Utilities {
 
-    private static final boolean DEBUG = true;
+    private static final boolean DEBUG = false;
     
     static File getNcdokDirectory() {
         String meconaHomeDir = FZ12Preferences.getInstance().getDefaultDirectory();
@@ -50,9 +50,9 @@ class Utilities {
 
     static Path getTemplatePath() {
         if ( DEBUG ) return Paths.get( "E:\\Dropbox\\Mecona\\VLISTFZ12.ODS");
-        String templateHomeDir = "J:\\NCPROG\\FZ12\\VLIST";
-        if ( Files.exists( Paths.get( templateHomeDir ))) {
-            return Paths.get( templateHomeDir );
+        String templatePath = "J:\\NCPROG\\Chiron FZ12\\VLISTFZ12.ODS";
+        if ( Files.exists( Paths.get( templatePath ))) {
+            return Paths.get( templatePath );
         } else {
             Utilities.showAlert("Ingen templatefil");
             return null;
@@ -62,7 +62,7 @@ class Utilities {
     static void showAboutBox() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Om");
-        alert.setContentText("Om FZ12Tools\nVersion 0.1 2017-01-08");
+        alert.setContentText("Om FZ12Tools\nVersion 0.1 2017-01-09");
         alert.showAndWait();
     }
 
