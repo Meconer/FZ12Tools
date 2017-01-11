@@ -7,6 +7,7 @@ package FZ12Tools;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,6 +19,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.util.StringConverter;
 
 /**
  * FXML Controller class
@@ -38,10 +40,12 @@ public class FXMLController implements Initializable {
     @FXML
     private TableView<Tool> tableView;
     @FXML
-    private TableColumn tNoCol, dNoCol, toolNameCol, typeCol, slValueCol, l1ValueCol,
+    private TableColumn<Tool, Integer> tNoCol, dNoCol, typeCol, slValueCol;
+    @FXML
+    private TableColumn<Tool, String>  toolNameCol, l1ValueCol,
             l2ValueCol, l3ValueCol, rValueCol;
     @FXML
-    private TableColumn l1OfsCol, l2OfsCol, l3OfsCol, rOfsCol;
+    private TableColumn<Tool, String> l1OfsCol, l2OfsCol, l3OfsCol, rOfsCol;
     @FXML
     private TabPane tabPane;
     @FXML
@@ -168,30 +172,155 @@ public class FXMLController implements Initializable {
         eraseTableRowButton.setDisable(true);
     }
 
+    private final StringConverter<Integer> stringIntegerConverter = new StringConverter<Integer>() {
+        @Override
+        public String toString(Integer intValue) {
+            return Integer.toString(intValue);
+        }
+
+        @Override
+        public Integer fromString(String stringValue) {
+            try {
+                return Integer.parseInt(stringValue);
+            } catch (NumberFormatException ex) {
+                Utilities.showAlert("Måste vara ett heltal");
+            }
+            return -1;
+        }
+    };
+            
+    private final EventHandler<TableColumn.CellEditEvent<Tool,Integer>> tNoEditCommitHandler = (TableColumn.CellEditEvent<Tool, Integer> event) -> {
+        Tool toolToChange = (Tool) event.getTableView().getItems().get(event.getTablePosition().getRow());
+        int newVal = event.getNewValue();
+        if ( newVal < 0 ) newVal = event.getOldValue();
+        toolToChange.setTNo( newVal );
+        Platform.runLater(tableView::refresh);
+    };
+
+    private final EventHandler<TableColumn.CellEditEvent<Tool,Integer>> dNoEditCommitHandler = (TableColumn.CellEditEvent<Tool, Integer> event) -> {
+        Tool toolToChange = (Tool) event.getTableView().getItems().get(event.getTablePosition().getRow());
+        int newVal = event.getNewValue();
+        if ( newVal < 0 ) newVal = event.getOldValue();
+        toolToChange.setdNo( newVal );
+        Platform.runLater(tableView::refresh);
+    };
+
+    private final EventHandler<TableColumn.CellEditEvent<Tool,Integer>> typeEditCommitHandler = (TableColumn.CellEditEvent<Tool, Integer> event) -> {
+        Tool toolToChange = (Tool) event.getTableView().getItems().get(event.getTablePosition().getRow());
+        int newVal = event.getNewValue();
+        if ( newVal < 0 ) newVal = event.getOldValue();
+        toolToChange.setToolType(newVal );
+        Platform.runLater(tableView::refresh);
+    };
+
+    private final EventHandler<TableColumn.CellEditEvent<Tool,String>> toolNameEditCommitHandler = (TableColumn.CellEditEvent<Tool, String> event) -> {
+        Tool toolToChange = (Tool) event.getTableView().getItems().get(event.getTablePosition().getRow());
+        toolToChange.setToolName( event.getNewValue() );
+    };
+
+    private final EventHandler<TableColumn.CellEditEvent<Tool,Integer>> slValueEditCommitHandler = (TableColumn.CellEditEvent<Tool, Integer> event) -> {
+        Tool toolToChange = (Tool) event.getTableView().getItems().get(event.getTablePosition().getRow());
+        int newVal = event.getNewValue();
+        if ( newVal < 0 ) newVal = event.getOldValue();
+        toolToChange.setSlValue( newVal );
+        Platform.runLater(tableView::refresh);
+    };
+
+    private final EventHandler<TableColumn.CellEditEvent<Tool,String>> l1ValueEditCommitHandler = (TableColumn.CellEditEvent<Tool, String> event) -> {
+        Tool toolToChange = (Tool) event.getTableView().getItems().get(event.getTablePosition().getRow());
+        toolToChange.setL1Value(event.getNewValue() );
+    };
+
+    private final EventHandler<TableColumn.CellEditEvent<Tool,String>> l2ValueEditCommitHandler = (TableColumn.CellEditEvent<Tool, String> event) -> {
+        Tool toolToChange = (Tool) event.getTableView().getItems().get(event.getTablePosition().getRow());
+        toolToChange.setL2Value(event.getNewValue() );
+    };
+
+    private final EventHandler<TableColumn.CellEditEvent<Tool,String>> l3ValueEditCommitHandler = (TableColumn.CellEditEvent<Tool, String> event) -> {
+        Tool toolToChange = (Tool) event.getTableView().getItems().get(event.getTablePosition().getRow());
+        toolToChange.setL3Value(event.getNewValue() );
+    };
+
+    private final EventHandler<TableColumn.CellEditEvent<Tool,String>> rValueEditCommitHandler = (TableColumn.CellEditEvent<Tool, String> event) -> {
+        Tool toolToChange = (Tool) event.getTableView().getItems().get(event.getTablePosition().getRow());
+        toolToChange.setRValue(event.getNewValue() );
+    };
+
+    private final EventHandler<TableColumn.CellEditEvent<Tool,String>> l1OfsEditCommitHandler = (TableColumn.CellEditEvent<Tool, String> event) -> {
+        Tool toolToChange = (Tool) event.getTableView().getItems().get(event.getTablePosition().getRow());
+        toolToChange.setL1Ofs(event.getNewValue() );
+    };
+
+    private final EventHandler<TableColumn.CellEditEvent<Tool,String>> l2OfsEditCommitHandler = (TableColumn.CellEditEvent<Tool, String> event) -> {
+        Tool toolToChange = (Tool) event.getTableView().getItems().get(event.getTablePosition().getRow());
+        toolToChange.setL2Ofs(event.getNewValue() );
+    };
+
+    private final EventHandler<TableColumn.CellEditEvent<Tool,String>> l3OfsEditCommitHandler = (TableColumn.CellEditEvent<Tool, String> event) -> {
+        Tool toolToChange = (Tool) event.getTableView().getItems().get(event.getTablePosition().getRow());
+        toolToChange.setL3Ofs(event.getNewValue() );
+    };
+
+    private final EventHandler<TableColumn.CellEditEvent<Tool,String>> rOfsEditCommitHandler = (TableColumn.CellEditEvent<Tool, String> event) -> {
+        Tool toolToChange = (Tool) event.getTableView().getItems().get(event.getTablePosition().getRow());
+        toolToChange.setROfs(event.getNewValue() );
+    };
+
+    
     private void initTableView() {
         tNoCol.setCellValueFactory(new PropertyValueFactory<>("tNo"));
+        tNoCol.setCellFactory(TextFieldTableCell.forTableColumn(stringIntegerConverter));
+        tNoCol.setOnEditCommit( tNoEditCommitHandler );
+        
         dNoCol.setCellValueFactory(new PropertyValueFactory<>("dNo"));
+        dNoCol.setCellFactory(TextFieldTableCell.forTableColumn(stringIntegerConverter));
+        dNoCol.setOnEditCommit( dNoEditCommitHandler );
         
         toolNameCol.setCellValueFactory(new PropertyValueFactory<>("toolName"));
         toolNameCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        toolNameCol.setOnEditCommit( new EventHandler<TableColumn.CellEditEvent<Tool, String>>() {
-            @Override
-            public void handle(TableColumn.CellEditEvent<Tool, String> event) {
-                ((Tool) event.getTableView().getItems().get( 
-                        event.getTablePosition().getRow())).setToolName(event.getNewValue());
-            }
-        } );
+        toolNameCol.setOnEditCommit( toolNameEditCommitHandler);
 
         typeCol.setCellValueFactory(new PropertyValueFactory<>("toolType"));
+        typeCol.setCellFactory(TextFieldTableCell.forTableColumn(stringIntegerConverter));
+        typeCol.setOnEditCommit( typeEditCommitHandler );
+
         slValueCol.setCellValueFactory(new PropertyValueFactory<>("slValue"));
+        slValueCol.setCellFactory(TextFieldTableCell.forTableColumn(stringIntegerConverter));
+        slValueCol.setOnEditCommit( slValueEditCommitHandler );
+
         l1ValueCol.setCellValueFactory(new PropertyValueFactory<>("l1Value"));
+        l1ValueCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        l1ValueCol.setOnEditCommit( l1ValueEditCommitHandler);
+
         l2ValueCol.setCellValueFactory(new PropertyValueFactory<>("l2Value"));
+        l2ValueCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        l3ValueCol.setOnEditCommit( l2ValueEditCommitHandler);
+
         l3ValueCol.setCellValueFactory(new PropertyValueFactory<>("l3Value"));
+        l3ValueCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        l3ValueCol.setOnEditCommit( l3ValueEditCommitHandler);
+
         rValueCol.setCellValueFactory(new PropertyValueFactory<>("rValue"));
+        rValueCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        rValueCol.setOnEditCommit( rValueEditCommitHandler);
+
         l1OfsCol.setCellValueFactory(new PropertyValueFactory<>("l1Ofs"));
+        l1OfsCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        l1OfsCol.setOnEditCommit( l1OfsEditCommitHandler);
+
         l2OfsCol.setCellValueFactory(new PropertyValueFactory<>("l2Ofs"));
+        l2OfsCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        l2OfsCol.setOnEditCommit( l2OfsEditCommitHandler);
+
         l3OfsCol.setCellValueFactory(new PropertyValueFactory<>("l3Ofs"));
+        l3OfsCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        l3OfsCol.setOnEditCommit( l3OfsEditCommitHandler);
+
         rOfsCol.setCellValueFactory(new PropertyValueFactory<>("rOfs"));
+        rOfsCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        rOfsCol.setOnEditCommit( rOfsEditCommitHandler);
+
+        
         if (!usedTools.collection.isEmpty()) {
             tableView.setItems(usedTools.collection);
             tableViewHasValues = true;
