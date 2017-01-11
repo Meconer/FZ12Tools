@@ -51,7 +51,7 @@ public class FXMLController implements Initializable {
     @FXML
     private Tab mpfTab, toaTab, zollerTab;
     @FXML
-    private Button eraseTableRowButton;
+    private Button eraseTableRowButton, addTableRowButton;
 
     @FXML
     private void onOpenToa() {
@@ -161,6 +161,17 @@ public class FXMLController implements Initializable {
         }
     }
 
+    @FXML
+    private void onAddTableRow() {
+        if ( tableViewHasValues ) {
+            Tool tool = new Tool();
+            tool.setTNo(usedTools.getNextFreeToolNo());
+            tool.setdNo(1);
+            usedTools.addTool(tool);
+            Platform.runLater(tableView::refresh);
+        }
+    }
+    
     /**
      * Initializes the controller class.
      *
@@ -170,6 +181,7 @@ public class FXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         eraseTableRowButton.setDisable(true);
+        addTableRowButton.setDisable(true);
     }
 
     private final StringConverter<Integer> stringIntegerConverter = new StringConverter<Integer>() {
@@ -326,6 +338,9 @@ public class FXMLController implements Initializable {
             tableViewHasValues = true;
         }
         tableView.setEditable(true);
+        
+        addTableRowButton.setDisable( !tableViewHasValues);
+        
         tableView.getSelectionModel().selectedItemProperty().addListener((obsList, oldSelection, newSelection) -> {
             eraseTableRowButton.setDisable(newSelection == null);
         });

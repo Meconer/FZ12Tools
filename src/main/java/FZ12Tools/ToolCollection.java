@@ -91,4 +91,13 @@ class ToolCollection {
         collection.remove(tool);
     }
 
+    int getNextFreeToolNo() {
+        if ( collection.isEmpty() ) return 1;
+        int tNo = 1;
+        while ( toolExist(tNo, 1)) {
+            tNo++;
+        }
+        return tNo;
+    }
+
 }

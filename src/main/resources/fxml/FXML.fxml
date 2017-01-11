@@ -97,6 +97,7 @@
    <bottom>
       <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="200.0" spacing="5.0" BorderPane.alignment="CENTER">
          <children>
+            <Button fx:id="addTableRowButton" mnemonicParsing="false" onAction="#onAddTableRow" text="Lägg till tabellrad" />
             <Button fx:id="eraseTableRowButton" mnemonicParsing="false" onAction="#onEraseTableRow" text="Radera tabellrad" />
          </children>
          <opaqueInsets>
