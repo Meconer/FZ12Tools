@@ -7,6 +7,7 @@ package FZ12Tools;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -16,6 +17,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 
 /**
  * FXML Controller class
@@ -28,7 +30,7 @@ public class FXMLController implements Initializable {
     ToaToolDescription toaToolDescription = null;
     ToolCollection usedTools = null;
     ZollerValues zollerValues = null;
-    
+
     boolean tableViewHasValues = false;
 
     @FXML
@@ -109,34 +111,34 @@ public class FXMLController implements Initializable {
 
     @FXML
     private void onFillInFromToa() {
-        if ( toaToolDescription != null ) {
-            if ( usedTools != null ) {
-                toaToolDescription.fillInToolCollectionFromToa( usedTools );
+        if (toaToolDescription != null) {
+            if (usedTools != null) {
+                toaToolDescription.fillInToolCollectionFromToa(usedTools);
                 tableView.refresh();
             }
         }
     }
-    
+
     @FXML
     private void onBuildToaFromTable() {
-        if ( tableViewHasValues ) {
-            toaToolDescription = ToaToolDescription.buildFromToolTable( usedTools );
+        if (tableViewHasValues) {
+            toaToolDescription = ToaToolDescription.buildFromToolTable(usedTools);
             toaTextArea.setText(toaToolDescription.getToaText());
         }
     }
 
     @FXML
     private void onBuildOdsToolList() {
-        if ( fZ12Program != null && usedTools != null) {
+        if (fZ12Program != null && usedTools != null) {
             OdsList.BuildFromProgramAndToolTable(fZ12Program, usedTools);
         }
     }
-    
+
     @FXML
     private void onOpenSettings() {
         SettingsDialog.showTemplateFileSettingsDialog();
     }
-    
+
     @FXML
     private void onClose() {
         System.exit(0);
@@ -149,12 +151,12 @@ public class FXMLController implements Initializable {
 
     @FXML
     private void onEraseTableRow() {
-        if ( tableViewHasValues ) {
+        if (tableViewHasValues) {
             Tool tool = tableView.getSelectionModel().getSelectedItem();
-            usedTools.removeTool( tool );
+            usedTools.removeTool(tool);
         }
     }
-    
+
     /**
      * Initializes the controller class.
      *
@@ -170,6 +172,17 @@ public class FXMLController implements Initializable {
         tNoCol.setCellValueFactory(new PropertyValueFactory<>("tNo"));
         dNoCol.setCellValueFactory(new PropertyValueFactory<>("dNo"));
         toolNameCol.setCellValueFactory(new PropertyValueFactory<>("toolName"));
+        toolNameCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        toolNameCol.setOnEditCommit( new EventHandler<TableColumn.CellEditEvent<Tool, String>>() {
+
+            @Override
+            public void handle(TableColumn.CellEditEvent<Tool, String> event) {
+                ((Tool) event.getTableView().getItems().get( 
+                        event.getTablePosition().getRow())).setToolName(event.getNewValue());
+            }
+
+        }
+        );
         typeCol.setCellValueFactory(new PropertyValueFactory<>("toolType"));
         slValueCol.setCellValueFactory(new PropertyValueFactory<>("slValue"));
         l1ValueCol.setCellValueFactory(new PropertyValueFactory<>("l1Value"));
@@ -180,13 +193,13 @@ public class FXMLController implements Initializable {
         l2OfsCol.setCellValueFactory(new PropertyValueFactory<>("l2Ofs"));
         l3OfsCol.setCellValueFactory(new PropertyValueFactory<>("l3Ofs"));
         rOfsCol.setCellValueFactory(new PropertyValueFactory<>("rOfs"));
-        if ( !usedTools.collection.isEmpty()) {
+        if (!usedTools.collection.isEmpty()) {
             tableView.setItems(usedTools.collection);
             tableViewHasValues = true;
         }
         tableView.setEditable(true);
         tableView.getSelectionModel().selectedItemProperty().addListener((obsList, oldSelection, newSelection) -> {
-            eraseTableRowButton.setDisable(newSelection == null );
+            eraseTableRowButton.setDisable(newSelection == null);
         });
     }
 
