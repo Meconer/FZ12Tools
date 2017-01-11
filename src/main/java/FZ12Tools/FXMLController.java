@@ -171,18 +171,17 @@ public class FXMLController implements Initializable {
     private void initTableView() {
         tNoCol.setCellValueFactory(new PropertyValueFactory<>("tNo"));
         dNoCol.setCellValueFactory(new PropertyValueFactory<>("dNo"));
+        
         toolNameCol.setCellValueFactory(new PropertyValueFactory<>("toolName"));
         toolNameCol.setCellFactory(TextFieldTableCell.forTableColumn());
         toolNameCol.setOnEditCommit( new EventHandler<TableColumn.CellEditEvent<Tool, String>>() {
-
             @Override
             public void handle(TableColumn.CellEditEvent<Tool, String> event) {
                 ((Tool) event.getTableView().getItems().get( 
                         event.getTablePosition().getRow())).setToolName(event.getNewValue());
             }
+        } );
 
-        }
-        );
         typeCol.setCellValueFactory(new PropertyValueFactory<>("toolType"));
         slValueCol.setCellValueFactory(new PropertyValueFactory<>("slValue"));
         l1ValueCol.setCellValueFactory(new PropertyValueFactory<>("l1Value"));
