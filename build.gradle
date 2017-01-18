@@ -35,4 +35,8 @@ jar {
                    "Implementation-Version": "1.0",
                    "Main-Class": "FZ12Tools.MainApp")
     }
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+
 }
