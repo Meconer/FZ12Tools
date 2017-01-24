@@ -64,6 +64,7 @@ class ToaToolDescription {
         usedTools.collection.forEach((tool) -> {
             sb.append(tool.createToaLines());
         });
+        sb.append("M17").append(System.lineSeparator());
         toaToolDescription.toaText = sb.toString();
         toaToolDescription.currentFilePath = null;
         return toaToolDescription;
