@@ -59,7 +59,13 @@
                     <tabs>
                         <Tab fx:id="mpfTab" closable="false" text="MPF">
                             <content>
-                                <TextArea fx:id="programTextArea" prefHeight="633.0" prefWidth="394.0" promptText="" text="&#10;" />
+                                <TextArea fx:id="programTextArea"
+                                          prefHeight="633.0"
+                                          prefWidth="394.0"
+                                          promptText="" 
+                                          onDragDropped="#dropping" 
+                                          onDragOver="#draggingOver" 
+                                          text="&#10;" />
                             </content>
                         </Tab>
                         <Tab fx:id="toaTab" closable="false" text="TOA">

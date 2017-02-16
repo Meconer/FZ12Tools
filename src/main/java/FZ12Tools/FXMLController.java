@@ -5,7 +5,12 @@
  */
 package FZ12Tools;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -19,6 +24,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 import javafx.util.StringConverter;
 
 /**
@@ -42,7 +50,7 @@ public class FXMLController implements Initializable {
     @FXML
     private TableColumn<Tool, Integer> tNoCol, dNoCol, typeCol, slValueCol;
     @FXML
-    private TableColumn<Tool, String>  toolNameCol, l1ValueCol,
+    private TableColumn<Tool, String> toolNameCol, l1ValueCol,
             l2ValueCol, l3ValueCol, rValueCol;
     @FXML
     private TableColumn<Tool, String> l1OfsCol, l2OfsCol, l3OfsCol, rOfsCol;
@@ -75,6 +83,40 @@ public class FXMLController implements Initializable {
         if (fZ12Program != null) {
             programTextArea.setText(fZ12Program.entireProgram);
             tabPane.getSelectionModel().select(mpfTab);
+        }
+    }
+
+    @FXML
+    void draggingOver(DragEvent event) {
+        Dragboard board = event.getDragboard();
+        if (board.hasFiles()) {
+            event.acceptTransferModes(TransferMode.ANY);
+        }
+
+    }
+
+    @FXML
+    void dropping(DragEvent event) {
+        try {
+            Dragboard board = event.getDragboard();
+            List<File> phil = board.getFiles();
+            FileInputStream fis;
+            fis = new FileInputStream(phil.get(0));
+
+            StringBuilder builder = new StringBuilder();
+            int ch;
+            while ((ch = fis.read()) != -1) {
+                builder.append((char) ch);
+            }
+
+            fis.close();
+
+            programTextArea.setText(builder.toString());
+
+        } catch (FileNotFoundException fnfe) {
+            Utilities.showAlert("Hittar inte filen vid drop");
+        } catch (IOException ioe) {
+            Utilities.showAlert("Fel vid inläsning av mpf-fil");
         }
     }
 
@@ -163,7 +205,7 @@ public class FXMLController implements Initializable {
 
     @FXML
     private void onAddTableRow() {
-        if ( tableViewHasValues ) {
+        if (tableViewHasValues) {
             Tool tool = new Tool();
             tool.setTNo(usedTools.getNextFreeToolNo());
             tool.setdNo(1);
@@ -171,7 +213,7 @@ public class FXMLController implements Initializable {
             Platform.runLater(tableView::refresh);
         }
     }
-    
+
     /**
      * Initializes the controller class.
      *
@@ -200,147 +242,153 @@ public class FXMLController implements Initializable {
             return -1;
         }
     };
-            
-    private final EventHandler<TableColumn.CellEditEvent<Tool,Integer>> tNoEditCommitHandler = (TableColumn.CellEditEvent<Tool, Integer> event) -> {
+
+    private final EventHandler<TableColumn.CellEditEvent<Tool, Integer>> tNoEditCommitHandler = (TableColumn.CellEditEvent<Tool, Integer> event) -> {
         Tool toolToChange = (Tool) event.getTableView().getItems().get(event.getTablePosition().getRow());
         int newVal = event.getNewValue();
-        if ( newVal < 0 ) newVal = event.getOldValue();
-        toolToChange.setTNo( newVal );
+        if (newVal < 0) {
+            newVal = event.getOldValue();
+        }
+        toolToChange.setTNo(newVal);
         Platform.runLater(tableView::refresh);
     };
 
-    private final EventHandler<TableColumn.CellEditEvent<Tool,Integer>> dNoEditCommitHandler = (TableColumn.CellEditEvent<Tool, Integer> event) -> {
+    private final EventHandler<TableColumn.CellEditEvent<Tool, Integer>> dNoEditCommitHandler = (TableColumn.CellEditEvent<Tool, Integer> event) -> {
         Tool toolToChange = (Tool) event.getTableView().getItems().get(event.getTablePosition().getRow());
         int newVal = event.getNewValue();
-        if ( newVal < 0 ) newVal = event.getOldValue();
-        toolToChange.setdNo( newVal );
+        if (newVal < 0) {
+            newVal = event.getOldValue();
+        }
+        toolToChange.setdNo(newVal);
         Platform.runLater(tableView::refresh);
     };
 
-    private final EventHandler<TableColumn.CellEditEvent<Tool,Integer>> typeEditCommitHandler = (TableColumn.CellEditEvent<Tool, Integer> event) -> {
+    private final EventHandler<TableColumn.CellEditEvent<Tool, Integer>> typeEditCommitHandler = (TableColumn.CellEditEvent<Tool, Integer> event) -> {
         Tool toolToChange = (Tool) event.getTableView().getItems().get(event.getTablePosition().getRow());
         int newVal = event.getNewValue();
-        if ( newVal < 0 ) newVal = event.getOldValue();
-        toolToChange.setToolType(newVal );
+        if (newVal < 0) {
+            newVal = event.getOldValue();
+        }
+        toolToChange.setToolType(newVal);
         Platform.runLater(tableView::refresh);
     };
 
-    private final EventHandler<TableColumn.CellEditEvent<Tool,String>> toolNameEditCommitHandler = (TableColumn.CellEditEvent<Tool, String> event) -> {
+    private final EventHandler<TableColumn.CellEditEvent<Tool, String>> toolNameEditCommitHandler = (TableColumn.CellEditEvent<Tool, String> event) -> {
         Tool toolToChange = (Tool) event.getTableView().getItems().get(event.getTablePosition().getRow());
-        toolToChange.setToolName( event.getNewValue() );
+        toolToChange.setToolName(event.getNewValue());
     };
 
-    private final EventHandler<TableColumn.CellEditEvent<Tool,Integer>> slValueEditCommitHandler = (TableColumn.CellEditEvent<Tool, Integer> event) -> {
+    private final EventHandler<TableColumn.CellEditEvent<Tool, Integer>> slValueEditCommitHandler = (TableColumn.CellEditEvent<Tool, Integer> event) -> {
         Tool toolToChange = (Tool) event.getTableView().getItems().get(event.getTablePosition().getRow());
         int newVal = event.getNewValue();
-        if ( newVal < 0 ) newVal = event.getOldValue();
-        toolToChange.setSlValue( newVal );
+        if (newVal < 0) {
+            newVal = event.getOldValue();
+        }
+        toolToChange.setSlValue(newVal);
         Platform.runLater(tableView::refresh);
     };
 
-    private final EventHandler<TableColumn.CellEditEvent<Tool,String>> l1ValueEditCommitHandler = (TableColumn.CellEditEvent<Tool, String> event) -> {
+    private final EventHandler<TableColumn.CellEditEvent<Tool, String>> l1ValueEditCommitHandler = (TableColumn.CellEditEvent<Tool, String> event) -> {
         Tool toolToChange = (Tool) event.getTableView().getItems().get(event.getTablePosition().getRow());
-        toolToChange.setL1Value(event.getNewValue() );
+        toolToChange.setL1Value(event.getNewValue());
     };
 
-    private final EventHandler<TableColumn.CellEditEvent<Tool,String>> l2ValueEditCommitHandler = (TableColumn.CellEditEvent<Tool, String> event) -> {
+    private final EventHandler<TableColumn.CellEditEvent<Tool, String>> l2ValueEditCommitHandler = (TableColumn.CellEditEvent<Tool, String> event) -> {
         Tool toolToChange = (Tool) event.getTableView().getItems().get(event.getTablePosition().getRow());
-        toolToChange.setL2Value(event.getNewValue() );
+        toolToChange.setL2Value(event.getNewValue());
     };
 
-    private final EventHandler<TableColumn.CellEditEvent<Tool,String>> l3ValueEditCommitHandler = (TableColumn.CellEditEvent<Tool, String> event) -> {
+    private final EventHandler<TableColumn.CellEditEvent<Tool, String>> l3ValueEditCommitHandler = (TableColumn.CellEditEvent<Tool, String> event) -> {
         Tool toolToChange = (Tool) event.getTableView().getItems().get(event.getTablePosition().getRow());
-        toolToChange.setL3Value(event.getNewValue() );
+        toolToChange.setL3Value(event.getNewValue());
     };
 
-    private final EventHandler<TableColumn.CellEditEvent<Tool,String>> rValueEditCommitHandler = (TableColumn.CellEditEvent<Tool, String> event) -> {
+    private final EventHandler<TableColumn.CellEditEvent<Tool, String>> rValueEditCommitHandler = (TableColumn.CellEditEvent<Tool, String> event) -> {
         Tool toolToChange = (Tool) event.getTableView().getItems().get(event.getTablePosition().getRow());
-        toolToChange.setRValue(event.getNewValue() );
+        toolToChange.setRValue(event.getNewValue());
     };
 
-    private final EventHandler<TableColumn.CellEditEvent<Tool,String>> l1OfsEditCommitHandler = (TableColumn.CellEditEvent<Tool, String> event) -> {
+    private final EventHandler<TableColumn.CellEditEvent<Tool, String>> l1OfsEditCommitHandler = (TableColumn.CellEditEvent<Tool, String> event) -> {
         Tool toolToChange = (Tool) event.getTableView().getItems().get(event.getTablePosition().getRow());
-        toolToChange.setL1Ofs(event.getNewValue() );
+        toolToChange.setL1Ofs(event.getNewValue());
     };
 
-    private final EventHandler<TableColumn.CellEditEvent<Tool,String>> l2OfsEditCommitHandler = (TableColumn.CellEditEvent<Tool, String> event) -> {
+    private final EventHandler<TableColumn.CellEditEvent<Tool, String>> l2OfsEditCommitHandler = (TableColumn.CellEditEvent<Tool, String> event) -> {
         Tool toolToChange = (Tool) event.getTableView().getItems().get(event.getTablePosition().getRow());
-        toolToChange.setL2Ofs(event.getNewValue() );
+        toolToChange.setL2Ofs(event.getNewValue());
     };
 
-    private final EventHandler<TableColumn.CellEditEvent<Tool,String>> l3OfsEditCommitHandler = (TableColumn.CellEditEvent<Tool, String> event) -> {
+    private final EventHandler<TableColumn.CellEditEvent<Tool, String>> l3OfsEditCommitHandler = (TableColumn.CellEditEvent<Tool, String> event) -> {
         Tool toolToChange = (Tool) event.getTableView().getItems().get(event.getTablePosition().getRow());
-        toolToChange.setL3Ofs(event.getNewValue() );
+        toolToChange.setL3Ofs(event.getNewValue());
     };
 
-    private final EventHandler<TableColumn.CellEditEvent<Tool,String>> rOfsEditCommitHandler = (TableColumn.CellEditEvent<Tool, String> event) -> {
+    private final EventHandler<TableColumn.CellEditEvent<Tool, String>> rOfsEditCommitHandler = (TableColumn.CellEditEvent<Tool, String> event) -> {
         Tool toolToChange = (Tool) event.getTableView().getItems().get(event.getTablePosition().getRow());
-        toolToChange.setROfs(event.getNewValue() );
+        toolToChange.setROfs(event.getNewValue());
     };
 
-    
     private void initTableView() {
         tNoCol.setCellValueFactory(new PropertyValueFactory<>("tNo"));
         tNoCol.setCellFactory(TextFieldTableCell.forTableColumn(stringIntegerConverter));
-        tNoCol.setOnEditCommit( tNoEditCommitHandler );
-        
+        tNoCol.setOnEditCommit(tNoEditCommitHandler);
+
         dNoCol.setCellValueFactory(new PropertyValueFactory<>("dNo"));
         dNoCol.setCellFactory(TextFieldTableCell.forTableColumn(stringIntegerConverter));
-        dNoCol.setOnEditCommit( dNoEditCommitHandler );
-        
+        dNoCol.setOnEditCommit(dNoEditCommitHandler);
+
         toolNameCol.setCellValueFactory(new PropertyValueFactory<>("toolName"));
         toolNameCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        toolNameCol.setOnEditCommit( toolNameEditCommitHandler);
+        toolNameCol.setOnEditCommit(toolNameEditCommitHandler);
 
         typeCol.setCellValueFactory(new PropertyValueFactory<>("toolType"));
         typeCol.setCellFactory(TextFieldTableCell.forTableColumn(stringIntegerConverter));
-        typeCol.setOnEditCommit( typeEditCommitHandler );
+        typeCol.setOnEditCommit(typeEditCommitHandler);
 
         slValueCol.setCellValueFactory(new PropertyValueFactory<>("slValue"));
         slValueCol.setCellFactory(TextFieldTableCell.forTableColumn(stringIntegerConverter));
-        slValueCol.setOnEditCommit( slValueEditCommitHandler );
+        slValueCol.setOnEditCommit(slValueEditCommitHandler);
 
         l1ValueCol.setCellValueFactory(new PropertyValueFactory<>("l1Value"));
         l1ValueCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        l1ValueCol.setOnEditCommit( l1ValueEditCommitHandler);
+        l1ValueCol.setOnEditCommit(l1ValueEditCommitHandler);
 
         l2ValueCol.setCellValueFactory(new PropertyValueFactory<>("l2Value"));
         l2ValueCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        l3ValueCol.setOnEditCommit( l2ValueEditCommitHandler);
+        l3ValueCol.setOnEditCommit(l2ValueEditCommitHandler);
 
         l3ValueCol.setCellValueFactory(new PropertyValueFactory<>("l3Value"));
         l3ValueCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        l3ValueCol.setOnEditCommit( l3ValueEditCommitHandler);
+        l3ValueCol.setOnEditCommit(l3ValueEditCommitHandler);
 
         rValueCol.setCellValueFactory(new PropertyValueFactory<>("rValue"));
         rValueCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        rValueCol.setOnEditCommit( rValueEditCommitHandler);
+        rValueCol.setOnEditCommit(rValueEditCommitHandler);
 
         l1OfsCol.setCellValueFactory(new PropertyValueFactory<>("l1Ofs"));
         l1OfsCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        l1OfsCol.setOnEditCommit( l1OfsEditCommitHandler);
+        l1OfsCol.setOnEditCommit(l1OfsEditCommitHandler);
 
         l2OfsCol.setCellValueFactory(new PropertyValueFactory<>("l2Ofs"));
         l2OfsCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        l2OfsCol.setOnEditCommit( l2OfsEditCommitHandler);
+        l2OfsCol.setOnEditCommit(l2OfsEditCommitHandler);
 
         l3OfsCol.setCellValueFactory(new PropertyValueFactory<>("l3Ofs"));
         l3OfsCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        l3OfsCol.setOnEditCommit( l3OfsEditCommitHandler);
+        l3OfsCol.setOnEditCommit(l3OfsEditCommitHandler);
 
         rOfsCol.setCellValueFactory(new PropertyValueFactory<>("rOfs"));
         rOfsCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        rOfsCol.setOnEditCommit( rOfsEditCommitHandler);
+        rOfsCol.setOnEditCommit(rOfsEditCommitHandler);
 
-        
         if (!usedTools.collection.isEmpty()) {
             tableView.setItems(usedTools.collection);
             tableViewHasValues = true;
         }
         tableView.setEditable(true);
-        
-        addTableRowButton.setDisable( !tableViewHasValues);
-        
+
+        addTableRowButton.setDisable(!tableViewHasValues);
+
         tableView.getSelectionModel().selectedItemProperty().addListener((obsList, oldSelection, newSelection) -> {
             eraseTableRowButton.setDisable(newSelection == null);
         });
