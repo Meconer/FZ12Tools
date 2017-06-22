@@ -135,6 +135,7 @@ public class FZ12Program {
                     tool.setL2Value("0");
                     tool.setL3Value("0");
                     tool.setRValue("0");
+                    tool.setOrientationValue("0");
                     tool.setSlValue(3);
                 }
             }

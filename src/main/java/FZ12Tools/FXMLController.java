@@ -51,7 +51,7 @@ public class FXMLController implements Initializable {
     private TableColumn<Tool, Integer> tNoCol, dNoCol, typeCol, slValueCol;
     @FXML
     private TableColumn<Tool, String> toolNameCol, l1ValueCol,
-            l2ValueCol, l3ValueCol, rValueCol;
+            l2ValueCol, l3ValueCol, rValueCol, orientationValueCol;
     @FXML
     private TableColumn<Tool, String> l1OfsCol, l2OfsCol, l3OfsCol, rOfsCol;
     @FXML
@@ -308,6 +308,11 @@ public class FXMLController implements Initializable {
         toolToChange.setRValue(event.getNewValue());
     };
 
+    private final EventHandler<TableColumn.CellEditEvent<Tool, String>> orientationValueEditCommitHandler = (TableColumn.CellEditEvent<Tool, String> event) -> {
+        Tool toolToChange = (Tool) event.getTableView().getItems().get(event.getTablePosition().getRow());
+        toolToChange.setOrientationValue(event.getNewValue());
+    };
+
     private final EventHandler<TableColumn.CellEditEvent<Tool, String>> l1OfsEditCommitHandler = (TableColumn.CellEditEvent<Tool, String> event) -> {
         Tool toolToChange = (Tool) event.getTableView().getItems().get(event.getTablePosition().getRow());
         toolToChange.setL1Ofs(event.getNewValue());
@@ -364,6 +369,10 @@ public class FXMLController implements Initializable {
         rValueCol.setCellValueFactory(new PropertyValueFactory<>("rValue"));
         rValueCol.setCellFactory(TextFieldTableCell.forTableColumn());
         rValueCol.setOnEditCommit(rValueEditCommitHandler);
+
+        orientationValueCol.setCellValueFactory(new PropertyValueFactory<>("orientationValue"));
+        orientationValueCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        orientationValueCol.setOnEditCommit(rValueEditCommitHandler);
 
         l1OfsCol.setCellValueFactory(new PropertyValueFactory<>("l1Ofs"));
         l1OfsCol.setCellFactory(TextFieldTableCell.forTableColumn());

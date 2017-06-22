@@ -24,6 +24,7 @@ public class Tool {
     private  String l2Value;
     private  String l3Value;
     private  String rValue;
+    private String orientationValue; // Spindle orientation for turning tools
     private  int slValue;      // Cut location
     private  int toolType;     // Tool type
     private  String l1Ofs;     // Wear values for geometry.
@@ -38,6 +39,7 @@ public class Tool {
     private static final String L2VAL_TOA_VAR = "\\$TC_DP4\\[(\\d+),(\\d+)\\]\\s*=\\s*([+-]?([0-9]*[.])?[0-9]+)";
     private static final String L3VAL_TOA_VAR = "\\$TC_DP5\\[(\\d+),(\\d+)\\]\\s*=\\s*([+-]?([0-9]*[.])?[0-9]+)";
     private static final String RVAL_TOA_VAR = "\\$TC_DP6\\[(\\d+),(\\d+)\\]\\s*=\\s*([+-]?([0-9]*[.])?[0-9]+)";
+    private static final String ORIENTVAL_TOA_VAR = "\\$TC_DP25\\[(\\d+),(\\d+)\\]\\s*=\\s*([+-]?([0-9]*[.])?[0-9]+)";
     private static final String L1OFS_TOA_VAR = "\\$TC_DP12\\[(\\d+),(\\d+)\\]\\s*=\\s*([+-]?([0-9]*[.])?[0-9]+)";
     private static final String L2OFS_TOA_VAR = "\\$TC_DP13\\[(\\d+),(\\d+)\\]\\s*=\\s*([+-]?([0-9]*[.])?[0-9]+)";
     private static final String L3OFS_TOA_VAR = "\\$TC_DP14\\[(\\d+),(\\d+)\\]\\s*=\\s*([+-]?([0-9]*[.])?[0-9]+)";
@@ -50,6 +52,7 @@ public class Tool {
     private static final Pattern L2VAL_TOA_PATTERN = Pattern.compile(L2VAL_TOA_VAR);
     private static final Pattern L3VAL_TOA_PATTERN = Pattern.compile(L3VAL_TOA_VAR);
     private static final Pattern RVAL_TOA_PATTERN = Pattern.compile(RVAL_TOA_VAR);
+    private static final Pattern ORIENTVAL_TOA_PATTERN = Pattern.compile(ORIENTVAL_TOA_VAR);
     
     private static final Pattern L1OFS_TOA_PATTERN = Pattern.compile(L1OFS_TOA_VAR);
     private static final Pattern L2OFS_TOA_PATTERN = Pattern.compile(L2OFS_TOA_VAR);
@@ -66,13 +69,14 @@ public class Tool {
         this.l2Value = "0";
         this.l3Value = "0";
         this.rValue = "0";
+        this.orientationValue = "0";
         this.l1Ofs = "0";
         this.l2Ofs = "0";
         this.l3Ofs = "0";
         this.rOfs = "0";
     }
     
-    public Tool( int tNo, int dNo, String l1Value, String lValue, String hValue, String rValue, int slValue) {
+    public Tool( int tNo, int dNo, String l1Value, String lValue, String hValue, String rValue, String orientationValue, int slValue) {
         this();
         this.tNo = tNo;
         this.dNo = dNo;
@@ -80,6 +84,7 @@ public class Tool {
         this.l2Value = lValue;
         this.l3Value = hValue;
         this.rValue = rValue;
+        this.orientationValue = orientationValue;
         this.slValue = slValue;
     }
 
@@ -151,6 +156,14 @@ public class Tool {
 
     public void setRValue(String rValue) {
         this.rValue = rValue;
+    }
+    
+    public String getOrientationValue() {
+        return orientationValue;
+    }
+    
+    public void setOrientationValue(String orientationValue) {
+        this.orientationValue = orientationValue;
     }
 
     public int getSlValue() {
@@ -312,6 +325,12 @@ public class Tool {
             return;
         }
         
+        m = ORIENTVAL_TOA_PATTERN.matcher(toaLine);
+        if (m.matches()) {
+            orientationValue = m.group(3);
+            return;
+        }
+        
         m = L1OFS_TOA_PATTERN.matcher(toaLine);
         if ( m.matches()) {
             l1Ofs = m.group(3);
@@ -414,7 +433,7 @@ public class Tool {
         sb.append("$TC_DP24[").append(tNo).append(",").append(dNo)
                 .append("]=").append("0").append(ls); // Not used
         sb.append("$TC_DP25[").append(tNo).append(",").append(dNo)
-                .append("]=").append("0").append(ls); // Not used
+                .append("]=").append(orientationValue).append(ls); // Orientation angle
         
         sb.append("$TC_DPC1[").append(tNo).append(",").append(dNo)
                 .append("]=").append("0").append(ls); // Not used
@@ -453,6 +472,7 @@ public class Tool {
         l2Value = toaTool.l2Value;
         l3Value = toaTool.l3Value;
         rValue = toaTool.rValue;
+        orientationValue = toaTool.orientationValue;
         l1Ofs = toaTool.l1Ofs;
         l2Ofs = toaTool.l2Ofs;
         l3Ofs = toaTool.l3Ofs;

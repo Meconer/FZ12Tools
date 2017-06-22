@@ -91,6 +91,7 @@
                         <TableColumn fx:id="l2ValueCol" prefWidth="60.0" text="Längd 2" />
                         <TableColumn fx:id="l3ValueCol" prefWidth="60.0" text="Längd 3" />
                         <TableColumn fx:id="rValueCol" prefWidth="60.0" text="Radie" />
+                        <TableColumn fx:id="orientationValueCol" prefWidth="60.0" text="Orient" />
                         <TableColumn fx:id="l1OfsCol" prefWidth="60.0" text="Försl L1" />
                         <TableColumn fx:id="l2OfsCol" prefWidth="60.0" text="Försl L2" />
                         <TableColumn fx:id="l3OfsCol" prefWidth="60.0" text="Försl L3" />
