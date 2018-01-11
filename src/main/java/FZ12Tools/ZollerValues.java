@@ -42,7 +42,7 @@ class ZollerValues {
         return null;
     }
 
-    void fillInToolCollectionFromZoller(ToolCollection usedTools) {
+    public void fillInToolCollectionFromZoller(ToolCollection usedTools) {
         for ( String zollerLine : text.split(System.lineSeparator())) {
             Tool zollerTool = Tool.getToolFromZollerLine( Utilities.removeComment(zollerLine) );
             Tool tool = usedTools.getTool(zollerTool.getTNo(), zollerTool.getDNo());
@@ -52,6 +52,15 @@ class ZollerValues {
         }
     }
 
-    
+    public ToolCollection createToolCollectionFromZollerFile() {
+        ToolCollection usedTools = new ToolCollection();
+        for ( String zollerLine : text.split(System.lineSeparator())) {
+            Tool zollerTool = Tool.getToolFromZollerLine( Utilities.removeComment(zollerLine) );
+            Tool tool = new Tool(zollerTool.getDNo(), zollerTool.getTNo());
+            tool.copyFromZollerValues( zollerTool );
+            usedTools.addTool(tool);
+        }
+        return usedTools;
+    }
     
 }

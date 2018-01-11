@@ -144,6 +144,14 @@ public class FXMLController implements Initializable {
             initTableView();
         }
     }
+    
+    @FXML
+    private void onCreateTableFromZoller() {
+        if ( zollerValues != null ) {
+            usedTools = zollerValues.createToolCollectionFromZollerFile();
+            initTableView();
+        }
+    }
 
     @FXML
     private void onFillInFromZoller() {
