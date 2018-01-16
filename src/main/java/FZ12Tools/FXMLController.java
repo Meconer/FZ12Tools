@@ -368,7 +368,7 @@ public class FXMLController implements Initializable {
 
         l2ValueCol.setCellValueFactory(new PropertyValueFactory<>("l2Value"));
         l2ValueCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        l3ValueCol.setOnEditCommit(l2ValueEditCommitHandler);
+        l2ValueCol.setOnEditCommit(l2ValueEditCommitHandler);
 
         l3ValueCol.setCellValueFactory(new PropertyValueFactory<>("l3Value"));
         l3ValueCol.setCellFactory(TextFieldTableCell.forTableColumn());
